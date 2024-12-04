@@ -6,11 +6,16 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, handleLogout } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+  // console.log(user && user?.email);
+  
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  // Default image and email name handling
+  const userPhoto = user?.photoURL || "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png";
+  const userName = user?.displayName || (user?.email ? user.email.split('@')[0] : "Unknown User");
 
   return (
     <nav className="bg-white px-6 md:px-20 py-4 flex justify-between items-center shadow-md w-full">
@@ -79,14 +84,14 @@ const Navbar = () => {
         {user ? (
           <div className="relative group">
             <img
-              src={user?.photoURL}
+              src={userPhoto} // Using the default photo if not found
               alt="User Avatar"
               className="w-10 h-10 rounded-full cursor-pointer"
             />
             <div className="absolute top-full mt-2 left-0 bg-white shadow-lg rounded-lg p-2 opacity-0 group-hover:opacity-100 transition duration-300">
-              <p className="text-sm text-gray-700">{user?.displayName}</p>
+              <p className="text-sm text-gray-700">{userName}</p> {/* Display the username or email name */}
               <button
-                onClick={handleLogout}
+                onClick={logOut}
                 className="text-red-500 hover:bg-gray-100 px-4 py-1 w-full text-left"
               >
                 Logout
@@ -165,7 +170,7 @@ const Navbar = () => {
         </NavLink>
         {user ? (
           <>
-            <p className="font-bold text-gray-700 py-2">{user.displayName}</p>
+            <p className="font-bold text-gray-700 py-2">{userName}</p>
             <button
               onClick={() => {
                 handleLogout();

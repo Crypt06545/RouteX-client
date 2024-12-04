@@ -9,7 +9,6 @@ import {
   sendPasswordResetEmail,
   GoogleAuthProvider,
   signInWithPopup,
-  updateProfile,
 } from "firebase/auth";
 import app from "../firebase/Firebase.config";
 
@@ -63,7 +62,6 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  
   // Observe user authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

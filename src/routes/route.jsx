@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 import ErrorPage from "../pages/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -17,9 +18,30 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/all-visas", element: <AllVisa /> },
-      { path: "/add-visa", element: <AddVisa /> },
-      { path: "/my-added-visas", element: <MyAddedVisa /> },
-      { path: "/my-visa-applications", element: <VisaApplication /> },
+      {
+        path: "/add-visa",
+        element: (
+          <PrivateRoute>
+            <AddVisa />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-added-visas",
+        element: (
+          <PrivateRoute>
+            <AddVisa />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-visa-applications",
+        element: (
+          <PrivateRoute>
+            <VisaApplication />
+          </PrivateRoute>
+        ),
+      },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
     ],
