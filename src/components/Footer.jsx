@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react"; // Import useContext from React
 import {
   FaFacebookF,
   FaTwitter,
@@ -6,10 +6,14 @@ import {
   FaLinkedinIn,
   FaChevronRight,
 } from "react-icons/fa";
-import { FiSend } from "react-icons/fi"; // for the send/subscribe button icon
+import { FiSend } from "react-icons/fi";
 import FooterBg from "../assets/fotter-bg.png";
 import FLogo from "../assets/Flogo.png";
+import { ThemeContext } from "../provider/ThemeProvider"; // Import your ThemeContext
+
 const Footer = () => {
+  const { theme } = useContext(ThemeContext); // Access the theme context
+
   return (
     <footer className="bg-[#034833] text-white py-16 relative overflow-hidden">
       {/* Background Image */}
@@ -20,7 +24,6 @@ const Footer = () => {
           className="w-full h-full object-cover"
         />
       </div>
-      {/* <div className="flex justify-center gap-10 items-center"></div> */}
 
       <div className="relative container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Left Section */}
@@ -28,7 +31,7 @@ const Footer = () => {
           <div className="mb-4">
             <div className="flex items-center gap-2">
               <div>
-                <img src={FLogo} alt="" />
+                <img src={FLogo} alt="Logo" />
               </div>
               <h1 className="text-3xl font-extrabold">VisaPortal</h1>
             </div>
@@ -54,8 +57,8 @@ const Footer = () => {
         </div>
 
         {/* Center Section */}
-        <div className="">
-          <div className=" flex gap-10  md:gap-20">
+        <div>
+          <div className="flex gap-10 md:gap-20">
             <div>
               <h2 className="text-lg font-bold mb-4">Services </h2>
               <ul className="text-sm">
@@ -100,11 +103,13 @@ const Footer = () => {
             Corporate business typically refers to large-scale enterprises or
             organizations.
           </p>
-          <div className={`flex`}>
+          <div
+            className={`flex ${theme === "dark" ? "text-white" : "text-black"}`}
+          >
             <input
               type="email"
               placeholder="Enter Email"
-              className="px-4 py-2 w-full rounded-l-md text-black focus:outline-none"
+              className="px-4 py-2 w-full rounded-l-md text-green-600 focus:outline-none"
             />
             <button className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-r-md flex items-center">
               <FiSend size={20} />

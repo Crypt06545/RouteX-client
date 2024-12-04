@@ -5,6 +5,8 @@ import logo from "../assets/Hlogo.png";
 import { AuthContext } from "../provider/AuthProvider";
 import ToggleTheme from "./ToggleTheme";
 import { ThemeContext } from "../provider/ThemeProvider";
+import navLinks from "../assets/navLinks.json"; // Import the JSON file
+
 const Navbar = () => {
   const { theme } = useContext(ThemeContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -36,69 +38,28 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Desktop Links */}
       <div className="hidden lg:flex space-x-6">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold rounded-full bg-[#83CD20] text-white px-4 py-2"
-              : `${
-                  theme === "dark" ? "text-white" : "text-[#034833]"
-                } hover:text-[#83CD20] px-4 py-2`
-          }
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/all-visas"
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold rounded-full bg-[#83CD20] text-white px-4 py-2"
-              : `${
-                  theme === "dark" ? "text-white" : "text-[#034833]"
-                } hover:text-[#83CD20] px-4 py-2`
-          }
-        >
-          All Visas
-        </NavLink>
-        <NavLink
-          to="/add-visa"
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold rounded-full bg-[#83CD20] text-white px-4 py-2"
-              : `${
-                  theme === "dark" ? "text-white" : "text-[#034833]"
-                } hover:text-[#83CD20] px-4 py-2`
-          }
-        >
-          Add Visa
-        </NavLink>
-        <NavLink
-          to="/my-added-visas"
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold rounded-full bg-[#83CD20] text-white px-4 py-2"
-              : `${
-                  theme === "dark" ? "text-white" : "text-[#034833]"
-                } hover:text-[#83CD20] px-4 py-2`
-          }
-        >
-          My Added Visas
-        </NavLink>
-        <NavLink
-          to="/my-visa-applications"
-          className={({ isActive }) =>
-            isActive
-              ? "font-bold rounded-full bg-[#83CD20] text-white px-4 py-2"
-              : `${
-                  theme === "dark" ? "text-white" : "text-[#034833]"
-                } hover:text-[#83CD20] px-4 py-2`
-          }
-        >
-          My Visa Applications
-        </NavLink>
+        {navLinks.desktop.map((link) => (
+          <NavLink
+            key={link.id}
+            to={link.to}
+            className={({ isActive }) =>
+              isActive
+                ? "font-bold rounded-full bg-[#83CD20] text-white px-4 py-2"
+                : `${
+                    theme === "dark"
+                      ? "font-bold text-white"
+                      : "font-bold text-[#034833]"
+                  } hover:text-[#83CD20] px-4 py-2`
+            }
+          >
+            {link.label}
+          </NavLink>
+        ))}
       </div>
 
+      {/* User Auth */}
       <div className="hidden md:flex items-center space-x-4">
         {user ? (
           <div className="relative group">
@@ -135,6 +96,7 @@ const Navbar = () => {
         )}
       </div>
 
+      {/* Mobile Menu Button */}
       <div className="lg:hidden">
         <button onClick={toggleMenu}>
           {isOpen ? (
@@ -145,46 +107,22 @@ const Navbar = () => {
         </button>
       </div>
 
+      {/* Mobile Links */}
       <div
         className={`${
           isOpen ? "block" : "hidden"
         } absolute top-16 left-0 w-full bg-white shadow-lg p-4 lg:hidden overflow-x-hidden`}
       >
-        <NavLink
-          to="/"
-          onClick={toggleMenu}
-          className="block font-bold text-[#034833] hover:text-[#83CD20] py-2"
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/all-visas"
-          onClick={toggleMenu}
-          className="block font-bold text-[#034833] hover:text-[#83CD20] py-2"
-        >
-          All Visas
-        </NavLink>
-        <NavLink
-          to="/add-visa"
-          onClick={toggleMenu}
-          className="block font-bold text-[#034833] hover:text-[#83CD20] py-2"
-        >
-          Add Visa
-        </NavLink>
-        <NavLink
-          to="/my-added-visas"
-          onClick={toggleMenu}
-          className="block font-bold text-[#034833] hover:text-[#83CD20] py-2"
-        >
-          My Added Visas
-        </NavLink>
-        <NavLink
-          to="/my-visa-applications"
-          onClick={toggleMenu}
-          className="block font-bold text-[#034833] hover:text-[#83CD20] py-2"
-        >
-          My Visa Applications
-        </NavLink>
+        {navLinks.mobile.map((link) => (
+          <NavLink
+            key={link.id}
+            to={link.to}
+            onClick={toggleMenu}
+            className="block font-bold text-[#034833] hover:text-[#83CD20] py-2"
+          >
+            {link.label}
+          </NavLink>
+        ))}
         {user ? (
           <>
             <p className="font-bold text-gray-700 py-2">{userName}</p>

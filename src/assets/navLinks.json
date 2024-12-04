@@ -1,0 +1,16 @@
+{
+  "desktop": [
+    { "id": 1, "label": "Home", "to": "/" },
+    { "id": 2, "label": "All Visas", "to": "/all-visas" },
+    { "id": 3, "label": "Add Visa", "to": "/add-visa" },
+    { "id": 4, "label": "My Added Visas", "to": "/my-added-visas" },
+    { "id": 5, "label": "My Visa Applications", "to": "/my-visa-applications" }
+  ],
+  "mobile": [
+    { "id": 1, "label": "Home", "to": "/" },
+    { "id": 2, "label": "All Visas", "to": "/all-visas" },
+    { "id": 3, "label": "Add Visa", "to": "/add-visa" },
+    { "id": 4, "label": "My Added Visas", "to": "/my-added-visas" },
+    { "id": 5, "label": "My Visa Applications", "to": "/my-visa-applications" }
+  ]
+}
