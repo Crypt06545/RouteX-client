@@ -7,7 +7,7 @@ export default {
         jakarta: ["Plus Jakarta Sans", "sans-serif"],
       },
     },
-    // font-family: "Plus Jakarta Sans", sans-serif;
   },
+  darkMode: 'class', // Enable dark mode based on a class (this is important)
   plugins: [require("daisyui")],
 };

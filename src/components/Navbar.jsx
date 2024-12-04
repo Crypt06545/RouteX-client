@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../assets/Hlogo.png";
 import { AuthContext } from "../provider/AuthProvider"; 
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,7 @@ const Navbar = () => {
   const userName = user?.displayName || (user?.email ? user.email.split('@')[0] : "Unknown User");
 
   return (
-    <nav className="bg-white px-6 md:px-20 py-4 flex justify-between items-center shadow-md w-full">
+    <nav className="bg-white text-black dark:bg-gray-800 dark:text-white px-6 md:px-20 py-4 flex justify-between items-center shadow-md w-full">
       {/* Website Logo */}
       <div className="flex items-center gap-2">
         <img src={logo} alt="logo" className="h-10" />
@@ -115,7 +116,7 @@ const Navbar = () => {
           </>
         )}
       </div>
-
+      <ThemeToggle />
       {/* Hamburger Icon for Mobile */}
       <div className="lg:hidden">
         <button onClick={toggleMenu}>

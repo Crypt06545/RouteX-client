@@ -1,5 +1,26 @@
+/* index.css */
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom global styles for light and dark themes */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+body.light {
+  background-color: white;
+  color: black;
+}
+
+body.dark {
+  background-color: #1a202c; /* Dark background */
+  color: white; /* Light text color */
+}
+
+/* You can also define custom styles for dark mode using the `.dark` class */
+.dark .text-primary {
+  color: #81e6d9; /* Example custom text color for dark mode */
+}
