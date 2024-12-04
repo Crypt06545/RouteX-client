@@ -1,27 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa"; // FaTimes for closing icon
-
+import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../assets/Hlogo.png";
+import { AuthContext } from "../provider/AuthProvider"; 
 
-const Navbar = ({ user, handleLogout }) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, handleLogout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+
   return (
-    <nav className="bg-white px-6 py-4 flex justify-between items-center shadow-md">
+    <nav className="bg-white px-6 md:px-20 py-4 flex justify-between items-center shadow-md w-full">
       {/* Website Logo */}
       <div className="flex items-center gap-2">
-        <div>
-          <img src={logo} alt="logo" />
-        </div>
-        <div className="text-2xl font-bold  text-[#034833]">VisaPortal</div>
+        <img src={logo} alt="logo" className="h-10" />
+        <div className="text-2xl font-bold text-[#034833]">VisaPortal</div>
       </div>
 
       {/* Desktop Navigation Links */}
-      <div className="hidden md:flex space-x-6">
+      <div className="hidden lg:flex space-x-6">
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -112,7 +112,7 @@ const Navbar = ({ user, handleLogout }) => {
       </div>
 
       {/* Hamburger Icon for Mobile */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <button onClick={toggleMenu}>
           {isOpen ? (
             <FaTimes className="text-[#034833] text-2xl" />
@@ -126,7 +126,7 @@ const Navbar = ({ user, handleLogout }) => {
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } absolute top-16 left-0 w-full bg-white shadow-lg p-4 md:hidden`}
+        } absolute top-16 left-0 w-full bg-white shadow-lg p-4 lg:hidden overflow-x-hidden`}
       >
         <NavLink
           to="/"
@@ -163,7 +163,6 @@ const Navbar = ({ user, handleLogout }) => {
         >
           My Visa Applications
         </NavLink>
-
         {user ? (
           <>
             <p className="font-bold text-gray-700 py-2">{user.displayName}</p>
