@@ -8,6 +8,8 @@ export default {
       },
     },
   },
-  darkMode: 'class', // Enable dark mode based on a class (this is important)
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light", "dark"],
+  },
 };

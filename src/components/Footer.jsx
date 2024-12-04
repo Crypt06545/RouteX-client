@@ -100,7 +100,7 @@ const Footer = () => {
             Corporate business typically refers to large-scale enterprises or
             organizations.
           </p>
-          <div className="flex">
+          <div className={`flex`}>
             <input
               type="email"
               placeholder="Enter Email"

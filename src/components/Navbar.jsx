@@ -1,13 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../assets/Hlogo.png";
 import { AuthContext } from "../provider/AuthProvider";
-
+import ToggleTheme from "./ToggleTheme";
+import { ThemeContext } from "../provider/ThemeProvider";
 const Navbar = () => {
+  const { theme } = useContext(ThemeContext);
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
-
   const navigate = useNavigate();
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -15,13 +16,24 @@ const Navbar = () => {
     user?.photoURL ||
     "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png";
   const userName =
-    user?.displayName || (user?.email ? user.email.split("@")[0] : "Unknown User");
+    user?.displayName ||
+    (user?.email ? user.email.split("@")[0] : "Unknown User");
 
   return (
-    <nav className="bg-white px-6 md:px-20 py-4 flex justify-between items-center shadow-md w-full">
+    <nav
+      className={`${
+        theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-[#034833]"
+      } px-6 md:px-20 py-4 flex justify-between items-center shadow-md w-full`}
+    >
       <div className="flex items-center gap-2">
         <img src={logo} alt="logo" className="h-10" />
-        <div className="text-2xl font-bold text-[#034833]">VisaPortal</div>
+        <div
+          className={`${
+            theme === "dark" ? "text-white" : "text-[#034833]"
+          } text-2xl font-bold`}
+        >
+          VisaPortal
+        </div>
       </div>
 
       <div className="hidden lg:flex space-x-6">
@@ -30,7 +42,9 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "font-bold rounded-full bg-[#83CD20] text-white px-4 py-2"
-              : "font-bold text-[#034833] hover:text-[#83CD20] px-4 py-2"
+              : `${
+                  theme === "dark" ? "text-white" : "text-[#034833]"
+                } hover:text-[#83CD20] px-4 py-2`
           }
         >
           Home
@@ -40,7 +54,9 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "font-bold rounded-full bg-[#83CD20] text-white px-4 py-2"
-              : "font-bold text-[#034833] hover:text-[#83CD20] px-4 py-2"
+              : `${
+                  theme === "dark" ? "text-white" : "text-[#034833]"
+                } hover:text-[#83CD20] px-4 py-2`
           }
         >
           All Visas
@@ -50,7 +66,9 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "font-bold rounded-full bg-[#83CD20] text-white px-4 py-2"
-              : "font-bold text-[#034833] hover:text-[#83CD20] px-4 py-2"
+              : `${
+                  theme === "dark" ? "text-white" : "text-[#034833]"
+                } hover:text-[#83CD20] px-4 py-2`
           }
         >
           Add Visa
@@ -60,7 +78,9 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "font-bold rounded-full bg-[#83CD20] text-white px-4 py-2"
-              : "font-bold text-[#034833] hover:text-[#83CD20] px-4 py-2"
+              : `${
+                  theme === "dark" ? "text-white" : "text-[#034833]"
+                } hover:text-[#83CD20] px-4 py-2`
           }
         >
           My Added Visas
@@ -70,7 +90,9 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "font-bold rounded-full bg-[#83CD20] text-white px-4 py-2"
-              : "font-bold text-[#034833] hover:text-[#83CD20] px-4 py-2"
+              : `${
+                  theme === "dark" ? "text-white" : "text-[#034833]"
+                } hover:text-[#83CD20] px-4 py-2`
           }
         >
           My Visa Applications
@@ -198,6 +220,11 @@ const Navbar = () => {
             </button>
           </>
         )}
+      </div>
+
+      {/* Dark/Light Mode Button */}
+      <div>
+        <ToggleTheme />
       </div>
     </nav>
   );
