@@ -2,7 +2,12 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        jakarta: ["Plus Jakarta Sans", "sans-serif"],
+      },
+    },
+    // font-family: "Plus Jakarta Sans", sans-serif;
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
