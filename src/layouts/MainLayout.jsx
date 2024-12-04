@@ -1,19 +1,22 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <div className='font-jakarta'>
-      <header className='sticky top-0 z-50'>
-        <Navbar/>
+    <div className="font-jakarta">
+      <header className="sticky top-0 z-50">
+        <Navbar />
       </header>
-
+      <section className="min-h-screen">
+        <Outlet />
+      </section>
       <section>
-        <Footer/>
+        <Footer />
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default MainLayout
+export default MainLayout;
