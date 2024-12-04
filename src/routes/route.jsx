@@ -13,7 +13,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/all-visas", element: <AllVisa /> },
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       { path: "/my-added-visas", element: <MyAddedVisa /> },
       { path: "/my-visa-applications", element: <VisaApplication /> },
       { path: "/login", element: <Login /> },
-      { path: "/resister", element: <Register /> },
+      { path: "/register", element: <Register /> },
     ],
   },
 ]);

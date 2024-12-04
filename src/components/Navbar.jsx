@@ -79,12 +79,12 @@ const Navbar = ({ user, handleLogout }) => {
         {user ? (
           <div className="relative group">
             <img
-              src={user.photoURL}
+              src={user?.photoURL}
               alt="User Avatar"
               className="w-10 h-10 rounded-full cursor-pointer"
             />
             <div className="absolute top-full mt-2 left-0 bg-white shadow-lg rounded-lg p-2 opacity-0 group-hover:opacity-100 transition duration-300">
-              <p className="text-sm text-gray-700">{user.displayName}</p>
+              <p className="text-sm text-gray-700">{user?.displayName}</p>
               <button
                 onClick={handleLogout}
                 className="text-red-500 hover:bg-gray-100 px-4 py-1 w-full text-left"
