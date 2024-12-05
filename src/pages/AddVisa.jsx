@@ -1,8 +1,12 @@
 import React, { useState, useContext } from "react";
 import Swal from "sweetalert2";
 import { ThemeContext } from "../provider/ThemeProvider";
+import { AuthContext } from "../provider/AuthProvider";
 
 const AddVisa = () => {
+  const { user } = useContext(AuthContext);
+  // console.log(user?.displayName);
+
   const { theme } = useContext(ThemeContext);
   const [visaData, setVisaData] = useState({
     countryImage: "",
@@ -15,6 +19,7 @@ const AddVisa = () => {
     fee: "",
     validity: "",
     applicationMethod: "",
+    createdby: user?.displayName,
   });
 
   const handleInputChange = (e) => {
@@ -41,32 +46,42 @@ const AddVisa = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    fetch("http://localhost:5000/addvisa", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(visaData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: "Visa Added Successfully!",
+            text: "The visa data has been Added",
+          });
+        }
+      });
 
     // Log the data to the console
     // console.log(visaData);
 
-
-    
     // Reset the form data
-    setVisaData({
-      countryImage: "",
-      countryName: "",
-      visaType: "Tourist Visa",
-      processingTime: "",
-      requiredDocuments: [],
-      description: "",
-      ageRestriction: "",
-      fee: "",
-      validity: "",
-      applicationMethod: "",
-    });
+    // setVisaData({
+    //   countryImage: "",
+    //   countryName: "",
+    //   visaType: "Tourist Visa",
+    //   processingTime: "",
+    //   requiredDocuments: [],
+    //   description: "",
+    //   ageRestriction: "",
+    //   fee: "",
+    //   validity: "",
+    //   applicationMethod: "",
+    // });
 
     // Optionally show a success message
-    Swal.fire({
-      icon: "success",
-      title: "Visa Added Successfully!",
-      text: "The visa data has been Added",
-    });
   };
 
   const formBgClass =
