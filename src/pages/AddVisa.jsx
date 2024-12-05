@@ -68,18 +68,18 @@ const AddVisa = () => {
     // console.log(visaData);
 
     // Reset the form data
-    // setVisaData({
-    //   countryImage: "",
-    //   countryName: "",
-    //   visaType: "Tourist Visa",
-    //   processingTime: "",
-    //   requiredDocuments: [],
-    //   description: "",
-    //   ageRestriction: "",
-    //   fee: "",
-    //   validity: "",
-    //   applicationMethod: "",
-    // });
+    setVisaData({
+      countryImage: "",
+      countryName: "",
+      visaType: "Tourist Visa",
+      processingTime: "",
+      requiredDocuments: [],
+      description: "",
+      ageRestriction: "",
+      fee: "",
+      validity: "",
+      applicationMethod: "",
+    });
 
     // Optionally show a success message
   };
