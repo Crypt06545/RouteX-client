@@ -11,6 +11,8 @@ const Navbar = () => {
   const { theme } = useContext(ThemeContext);
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
+  // console.log(user?.photoURL);
+  
   const navigate = useNavigate();
   const toggleMenu = () => setIsOpen(!isOpen);
 

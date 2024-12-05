@@ -46,7 +46,7 @@ const AddVisa = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/addvisa", {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/addvisa`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

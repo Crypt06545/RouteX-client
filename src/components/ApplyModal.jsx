@@ -1,13 +1,14 @@
-import React, { useContext, useState } from "react";
-import { ThemeContext } from "../provider/ThemeProvider";
+import React, { useState, useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import { ThemeContext } from "../provider/ThemeProvider";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { format } from "date-fns"; 
+import { format } from "date-fns";
+import Swal from "sweetalert2"; // Ensure you have SweetAlert2 installed
 
 const ApplyModal = ({ visaDetails }) => {
   const { user } = useContext(AuthContext);
-  const { theme } = useContext(ThemeContext); // Get the current theme
+  const { theme } = useContext(ThemeContext);
 
   const modalClass =
     theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black";
@@ -20,20 +21,73 @@ const ApplyModal = ({ visaDetails }) => {
       ? "input input-bordered w-full px-4 py-2 mt-2 rounded-lg border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
       : "input input-bordered w-full px-4 py-2 mt-2 rounded-lg border-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-emerald-500";
 
-  // State for date selection
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [applyData, setApplyData] = useState({
+    email: user?.email || "",
+    firstName: "",
+    lastName: "",
+    fee: visaDetails?.fee || "",
+    selectedDate: new Date(),
+  });
 
-  // Handle form submission
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setApplyData({ ...applyData, [name]: value });
+  };
+
+  const handleDateChange = (date) => {
+    setApplyData({ ...applyData, selectedDate: date });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formattedDate = format(selectedDate, "dd-MM-yyyy hh:mm a");
-    // Log the formatted date and time when submit is clicked
-    console.log("Selected Date and Time: ", formattedDate);
+    const formattedDate = format(applyData.selectedDate, "dd-MM-yyyy hh:mm a");
+    const applyDate = formattedDate
+
+    const finalApplyData = {
+      email: applyData.email,
+      firstName: applyData.firstName,
+      lastName: applyData.lastName,
+      fee: applyData.fee,
+      applyDate,
+    };
+
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/applyvisa`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(finalApplyData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: "Applied Successfully!",
+            text: "The apply data has been added successfully.",
+          });
+
+          document.getElementById("my_modal_5").close(); // Close modal
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Submission Failed",
+            text: "Please try again.",
+          });
+        }
+      })
+      .catch((err) => {
+        console.error("Error submitting form:", err);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An error occurred. Please try again later.",
+        });
+      });
   };
 
   return (
     <div>
-      {/* Apply Now Button */}
       <button
         className={`${buttonClass} px-6 py-2 mt-4 rounded-full font-semibold`}
         onClick={() => document.getElementById("my_modal_5").showModal()}
@@ -41,20 +95,17 @@ const ApplyModal = ({ visaDetails }) => {
         Apply Now
       </button>
 
-      {/* Modal */}
       <dialog
         id="my_modal_5"
         className={`modal modal-bottom sm:modal-middle ${modalClass}`}
       >
         <div className="modal-box shadow-lg rounded-lg max-w-md w-full p-6">
-          {/* Modal Header */}
           <h3 className="font-bold text-2xl mb-4">Apply for Visa</h3>
           <p className="mb-6">
-            Fill in your details to apply for the visa. Make sure all the
-            information is correct before submitting.
+            Fill in your details to apply for the visa. Make sure all
+            information is correct.
           </p>
 
-          {/* Form Inputs */}
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="block text-sm" htmlFor="email">
@@ -62,75 +113,79 @@ const ApplyModal = ({ visaDetails }) => {
               </label>
               <input
                 type="email"
-                defaultValue={user?.email}
+                name="email"
+                value={applyData.email}
                 id="email"
-                placeholder="Enter your email"
                 className={inputClass}
                 required
                 readOnly
               />
             </div>
-
             <div>
               <label className="block text-sm" htmlFor="firstName">
                 First Name
               </label>
               <input
                 type="text"
+                name="firstName"
+                value={applyData.firstName}
                 id="firstName"
                 placeholder="Enter your first name"
                 className={inputClass}
                 required
+                onChange={handleChange}
               />
             </div>
-
             <div>
               <label className="block text-sm" htmlFor="lastName">
                 Last Name
               </label>
               <input
                 type="text"
+                name="lastName"
+                value={applyData.lastName}
                 id="lastName"
                 placeholder="Enter your last name"
                 className={inputClass}
                 required
+                onChange={handleChange}
               />
             </div>
-
             <div>
               <label className="block text-sm" htmlFor="fee">
                 Fee
               </label>
               <input
                 type="number"
+                name="fee"
+                value={applyData.fee}
                 id="fee"
-                defaultValue={visaDetails?.fee}
                 className={inputClass}
-                required
                 readOnly
               />
             </div>
-
-            {/* Date and Time Picker */}
             <div>
               <label className="block text-sm" htmlFor="date">
                 Select Date
               </label>
               <DatePicker
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)} 
+                selected={applyData.selectedDate}
+                onChange={handleDateChange}
                 showTimeSelect
-                dateFormat="dd-MM-yyyy hh:mm a" 
-                className={inputClass} 
+                dateFormat="dd-MM-yyyy hh:mm a"
+                className={inputClass}
               />
             </div>
 
-            {/* Modal Action Buttons */}
             <div className="modal-action flex justify-between items-center mt-6">
-              <button type="submit" className={`${buttonClass} px-6 py-2 rounded-lg`}>
+              <button
+                type="submit"
+                className={`${buttonClass} px-6 py-2 rounded-lg`}
+              >
                 Submit
               </button>
               <button
+                type="button"
                 className="btn bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2 rounded-lg"
                 onClick={() => document.getElementById("my_modal_5").close()}
               >
