@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "../provider/ThemeProvider"; // Assuming you have a ThemeContext provider
+import React, { useContext, useState } from "react";
+import { ThemeContext } from "../provider/ThemeProvider";
 import { AuthContext } from "../provider/AuthProvider";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns"; 
 
 const ApplyModal = ({ visaDetails }) => {
   const { user } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext); // Get the current theme
 
-  // Define conditional classes based on the theme
   const modalClass =
     theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black";
   const buttonClass =
@@ -18,15 +20,16 @@ const ApplyModal = ({ visaDetails }) => {
       ? "input input-bordered w-full px-4 py-2 mt-2 rounded-lg border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
       : "input input-bordered w-full px-4 py-2 mt-2 rounded-lg border-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-emerald-500";
 
-  // Get the current date and format it
-  const today = new Date();
-  const currentMonth = today.getMonth() + 1; // Months are zero-indexed
-  const currentYear = today.getFullYear();
-  const currentDate = today.getDate();
+  // State for date selection
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const [month, setMonth] = useState(currentMonth);
-  const [year, setYear] = useState(currentYear);
-  const [day, setDay] = useState(currentDate);
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formattedDate = format(selectedDate, "dd-MM-yyyy hh:mm a");
+    // Log the formatted date and time when submit is clicked
+    console.log("Selected Date and Time: ", formattedDate);
+  };
 
   return (
     <div>
@@ -52,7 +55,7 @@ const ApplyModal = ({ visaDetails }) => {
           </p>
 
           {/* Form Inputs */}
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="block text-sm" htmlFor="email">
                 Email Address
@@ -108,57 +111,23 @@ const ApplyModal = ({ visaDetails }) => {
               />
             </div>
 
-            {/* Date and Time side by side */}
-            <div className="flex space-x-4">
-              <div>
-                <label className="block text-sm" htmlFor="day">
-                  Day
-                </label>
-                <input
-                  type="number"
-                  id="day"
-                  value={day}
-                  onChange={(e) => setDay(e.target.value)}
-                  className={inputClass}
-                  required
-                  min="1"
-                  max="31"
-                />
-              </div>
-              <div>
-                <label className="block text-sm" htmlFor="month">
-                  Month
-                </label>
-                <input
-                  type="number"
-                  id="month"
-                  value={month}
-                  onChange={(e) => setMonth(e.target.value)}
-                  className={inputClass}
-                  required
-                  min="1"
-                  max="12"
-                />
-              </div>
-              <div>
-                <label className="block text-sm" htmlFor="year">
-                  Year
-                </label>
-                <input
-                  type="number"
-                  id="year"
-                  value={year}
-                  onChange={(e) => setYear(e.target.value)}
-                  className={inputClass}
-                  required
-                  min={currentYear}
-                />
-              </div>
+            {/* Date and Time Picker */}
+            <div>
+              <label className="block text-sm" htmlFor="date">
+                Select Date
+              </label>
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date) => setSelectedDate(date)} 
+                showTimeSelect
+                dateFormat="dd-MM-yyyy hh:mm a" 
+                className={inputClass} 
+              />
             </div>
 
             {/* Modal Action Buttons */}
             <div className="modal-action flex justify-between items-center mt-6">
-              <button className={`${buttonClass} px-6 py-2 rounded-lg`}>
+              <button type="submit" className={`${buttonClass} px-6 py-2 rounded-lg`}>
                 Submit
               </button>
               <button

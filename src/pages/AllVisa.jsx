@@ -14,7 +14,7 @@ const AllVisa = () => {
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setVisas(data.slice(0, 6)); // Load only 6 latest visas
+        setVisas(data); // Load only 6 latest visas
         setLoading(false); // Hide the loader once data is fetched
       })
       .catch((error) => {
@@ -45,7 +45,7 @@ const AllVisa = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {visas.map((visa) => (
             <div
               key={visa._id}
