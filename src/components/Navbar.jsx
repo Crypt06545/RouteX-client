@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../assets/Hlogo.png";
@@ -25,7 +25,7 @@ const Navbar = () => {
     <nav
       className={`${
         theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-[#034833]"
-      } px-6 md:px-20 py-4 flex justify-between items-center shadow-md w-full`}
+      } px-2 py-4 flex justify-between items-center shadow-md w-full`}
     >
       <div className="flex items-center gap-2">
         <img src={logo} alt="logo" className="h-10" />
@@ -51,7 +51,7 @@ const Navbar = () => {
                     theme === "dark"
                       ? "font-bold text-white"
                       : "font-bold text-[#034833]"
-                  } hover:text-[#83CD20] px-4 py-2`
+                  } hover:text-[#83CD20] px-2 py-2`
             }
           >
             {link.label}

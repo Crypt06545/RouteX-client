@@ -9,9 +9,11 @@ const MainLayout = () => {
       <header className="sticky top-0 z-50">
         <Navbar />
       </header>
-      <section className="min-h-screen">
+
+      <section className="">
         <Outlet />
       </section>
+
       <section>
         <Footer />
       </section>

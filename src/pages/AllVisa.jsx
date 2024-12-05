@@ -2,7 +2,7 @@ import React from 'react'
 
 const AllVisa = () => {
   return (
-    <div>AllVisa</div>
+    <div className='my-20'>AllVisa</div>
   )
 }
 
