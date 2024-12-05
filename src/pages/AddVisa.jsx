@@ -19,7 +19,7 @@ const AddVisa = () => {
     fee: "",
     validity: "",
     applicationMethod: "",
-    createdby: user?.displayName,
+    createdby: user?.displayName || user?.email?.split("@")[0],
   });
 
   const handleInputChange = (e) => {

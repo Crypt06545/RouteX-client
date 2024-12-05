@@ -4,7 +4,7 @@ import { ThemeContext } from "../provider/ThemeProvider";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
-import Swal from "sweetalert2"; // Ensure you have SweetAlert2 installed
+import Swal from "sweetalert2";
 
 const ApplyModal = ({ visaDetails }) => {
   const { user } = useContext(AuthContext);
@@ -41,7 +41,7 @@ const ApplyModal = ({ visaDetails }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formattedDate = format(applyData.selectedDate, "dd-MM-yyyy hh:mm a");
-    const applyDate = formattedDate
+    const applyDate = formattedDate;
 
     const finalApplyData = {
       email: applyData.email,
@@ -49,6 +49,7 @@ const ApplyModal = ({ visaDetails }) => {
       lastName: applyData.lastName,
       fee: applyData.fee,
       applyDate,
+      visaDetails: visaDetails,
     };
 
     fetch(`${import.meta.env.VITE_API_BASE_URL}/applyvisa`, {
@@ -92,7 +93,7 @@ const ApplyModal = ({ visaDetails }) => {
         className={`${buttonClass} px-6 py-2 mt-4 rounded-full font-semibold`}
         onClick={() => document.getElementById("my_modal_5").showModal()}
       >
-        Apply Now
+        Apply for the visa
       </button>
 
       <dialog
@@ -114,11 +115,10 @@ const ApplyModal = ({ visaDetails }) => {
               <input
                 type="email"
                 name="email"
-                value={applyData.email}
+                defaultValue={applyData.email}
                 id="email"
                 className={inputClass}
                 required
-                readOnly
               />
             </div>
             <div>
@@ -128,7 +128,7 @@ const ApplyModal = ({ visaDetails }) => {
               <input
                 type="text"
                 name="firstName"
-                value={applyData.firstName}
+                defaultValue={applyData.firstName}
                 id="firstName"
                 placeholder="Enter your first name"
                 className={inputClass}
@@ -143,7 +143,7 @@ const ApplyModal = ({ visaDetails }) => {
               <input
                 type="text"
                 name="lastName"
-                value={applyData.lastName}
+                defaultValue={applyData.lastName}
                 id="lastName"
                 placeholder="Enter your last name"
                 className={inputClass}
@@ -158,7 +158,7 @@ const ApplyModal = ({ visaDetails }) => {
               <input
                 type="number"
                 name="fee"
-                value={applyData.fee}
+                defaultValue={applyData.fee}
                 id="fee"
                 className={inputClass}
                 readOnly
