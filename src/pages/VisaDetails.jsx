@@ -81,7 +81,7 @@ const VisaDetails = () => {
             <strong>Application Method:</strong> {visaDetails.applicationMethod}
           </p>
           <p className="text-sm sm:text-base">
-            <strong>Created by:</strong> {visaDetails.createdby}
+            <strong>Created by:</strong> {visaDetails.createdby.split("@")[0]}
           </p>
           <h3 className="text-xl sm:text-2xl font-semibold mt-6">
             Required Documents

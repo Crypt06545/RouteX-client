@@ -20,7 +20,7 @@ const VisaApplication = () => {
         .then((res) => res.json())
         .then((data) => {
           setVisaApplications(data); // Set fetched data to state
-          setIsLoading(false); // Set loading to false after fetching
+          setIsLoading(false);
         })
         .catch((err) => {
           console.error("Error fetching data:", err);
