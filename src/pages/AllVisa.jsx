@@ -38,42 +38,46 @@ const AllVisa = () => {
       : "bg-emerald-600 hover:bg-emerald-700";
 
   return (
-    <div className={`p-8 ${containerClass}`}>
+    <div className={`min-h-screen p-8 ${containerClass}`}>
       <h2 className="text-3xl font-bold text-center mb-8">All Visas</h2>
 
       {/* Loader */}
       {loading ? (
         <Loader />
+      ) : visas.length === 0 ? (
+        // Display "No Data Found" if visas array is empty
+        <div className="text-center text-xl font-medium text-red-500">
+          No Data Found
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {visas.map((visa) => (
             <div
-              key={visa._id}
+              key={visa?._id}
               className={`shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 ${cardClass}`}
             >
               <img
-                src={visa.countryImage || "https://via.placeholder.com/400"} // Fallback image URL
-                alt={visa.countryName || "Visa Image"}
+                src={visa?.countryImage}
+                alt={visa?.countryName}
                 className="w-full h-48 object-cover"
               />
               <div className="p-6">
                 <h3 className="text-2xl font-semibold text-emerald-400 mb-2">
-                  {visa.countryName || "No Country Name Provided"}
+                  {visa?.countryName}
                 </h3>
                 <p className="mb-1">
-                  <strong>Visa Type:</strong> {visa.visaType || "N/A"}
+                  <strong>Visa Type:</strong> {visa?.visaType}
                 </p>
                 <p className="mb-1">
-                  <strong>Processing Time:</strong>{" "}
-                  {visa.processingTime || "N/A"} days
+                  <strong>Processing Time:</strong> {visa?.processingTime} days
                 </p>
                 <p className="mb-1">
-                  <strong>Fee:</strong> ${visa.fee || "N/A"}
+                  <strong>Fee:</strong> ${visa?.fee}
                 </p>
 
                 <button
                   className={`${buttonClass} text-white py-2 px-4 rounded w-full transition-colors duration-300 mt-4`}
-                  onClick={() => handleDetails(visa._id)}
+                  onClick={() => handleDetails(visa?._id)}
                 >
                   See Details
                 </button>

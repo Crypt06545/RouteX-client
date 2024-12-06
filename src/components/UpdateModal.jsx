@@ -36,11 +36,15 @@ const UpdateModal = ({ visa, closeModal, onSubmit }) => {
       <div
         className={`w-full sm:w-[500px] p-6 rounded-lg shadow-lg transition-all duration-300 ${modalBgColor}`}
       >
-        <h2 className={`text-2xl font-semibold mb-6 ${textColor} text-center`}>Update Visa Information</h2>
+        <h2 className={`text-2xl font-semibold mb-6 ${textColor} text-center`}>
+          Update Visa Information
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className={`block font-medium mb-2 ${textColor}`}>Country Name</label>
+              <label className={`block font-medium mb-2 ${textColor}`}>
+                Country Name
+              </label>
               <input
                 type="text"
                 name="countryName"
@@ -51,7 +55,9 @@ const UpdateModal = ({ visa, closeModal, onSubmit }) => {
               />
             </div>
             <div>
-              <label className={`block font-medium mb-2 ${textColor}`}>Country Image URL</label>
+              <label className={`block font-medium mb-2 ${textColor}`}>
+                Country Image URL
+              </label>
               <input
                 type="text"
                 name="countryImage"
@@ -62,20 +68,28 @@ const UpdateModal = ({ visa, closeModal, onSubmit }) => {
               />
             </div>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className={`block font-medium mb-2 ${textColor}`}>Visa Type</label>
-              <input
-                type="text"
+              <label className={`block font-medium mb-2 ${textColor}`}>
+                Visa Type
+              </label>
+              <select
                 name="visaType"
                 value={formData.visaType}
                 onChange={handleChange}
                 className="w-full p-3 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
-              />
+              >
+                <option value="Tourist visa">Tourist Visa</option>
+                <option value="Student visa">Student Visa</option>
+                <option value="Official visa">Official Visa</option>
+              </select>
             </div>
             <div>
-              <label className={`block font-medium mb-2 ${textColor}`}>Processing Time (Days)</label>
+              <label className={`block font-medium mb-2 ${textColor}`}>
+                Processing Time (Days)
+              </label>
               <input
                 type="number"
                 name="processingTime"
@@ -86,9 +100,12 @@ const UpdateModal = ({ visa, closeModal, onSubmit }) => {
               />
             </div>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className={`block font-medium mb-2 ${textColor}`}>Fee (USD)</label>
+              <label className={`block font-medium mb-2 ${textColor}`}>
+                Fee (USD)
+              </label>
               <input
                 type="number"
                 name="fee"
@@ -99,7 +116,9 @@ const UpdateModal = ({ visa, closeModal, onSubmit }) => {
               />
             </div>
             <div>
-              <label className={`block font-medium mb-2 ${textColor}`}>Validity (Months)</label>
+              <label className={`block font-medium mb-2 ${textColor}`}>
+                Validity (Months)
+              </label>
               <input
                 type="number"
                 name="validity"
@@ -111,7 +130,9 @@ const UpdateModal = ({ visa, closeModal, onSubmit }) => {
             </div>
           </div>
           <div>
-            <label className={`block font-medium mb-2 ${textColor}`}>Application Method</label>
+            <label className={`block font-medium mb-2 ${textColor}`}>
+              Application Method
+            </label>
             <input
               type="text"
               name="applicationMethod"

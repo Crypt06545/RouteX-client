@@ -42,11 +42,14 @@ const LatestVisas = () => {
 
   return (
     <div className={`p-8 ${containerClass}`}>
+      <h2 className="text-3xl font-bold text-center mb-8">Latest Visas</h2>
       {isLoading ? (
-        <Loader /> // Show the loader if data is still being fetched
+        <Loader />
+      ) : visas.length === 0 ? (
+        // No data found validation
+        <div className="text-center text-xl text-red-500">No data found.</div>
       ) : (
         <>
-          <h2 className="text-3xl font-bold text-center mb-8">Latest Visas</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {visas.map((visa) => (
               <div
@@ -82,8 +85,7 @@ const LatestVisas = () => {
 
                   {/* New Section: Description */}
                   <p className="mb-4">
-                    <strong>Description:</strong>{" "}
-                    {visa?.description || "No description available"}
+                    <strong>Description:</strong> {visa?.description}
                   </p>
 
                   {/* New Section: Required Documents */}
