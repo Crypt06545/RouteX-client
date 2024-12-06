@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
 import { ThemeContext } from "../provider/ThemeProvider"; // Import the theme context
-
-const UpdateModal = ({ visa, closeModal, onSubmit }) => {
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+const UpdateModal = ({ visa, closeModal }) => {
   const { theme } = useContext(ThemeContext); // Use the theme context here
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     countryName: visa?.countryName || "",
     countryImage: visa?.countryImage || "",
@@ -19,10 +20,57 @@ const UpdateModal = ({ visa, closeModal, onSubmit }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // updated data logic
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(visa._id, formData); // Update visa in the database
-    closeModal(); // Close the modal after submission
+
+    const visaId = visa?._id;
+    // console.log("Visa ID:", visaId);
+    // console.log("Updated Information:", formData);
+
+    // Confirm save changes using Swal
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform API call to update the visa
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/updatevisa/${visaId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.matchedCount > 0) {
+              Swal.fire(
+                "Saved!",
+                "Visa information has been updated successfully.",
+                "success"
+              ).then(() => {
+                navigate("/all-visas");
+              });
+            } else {
+              Swal.fire("Failed!", "No changes were made.", "error");
+            }
+            // console.log("API Response:", data);
+          })
+          .catch((error) => {
+            console.error("Error updating visa:", error);
+            Swal.fire("Error!", "Failed to update visa information.", "error");
+          });
+
+        // Close the modal after successful confirmation
+        closeModal();
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
   };
 
   // Determine classes based on the current theme

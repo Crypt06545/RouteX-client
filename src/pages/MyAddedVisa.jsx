@@ -1,3 +1,5 @@
+import Loader from "../components/Loader";
+
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../provider/ThemeProvider";
 import { AuthContext } from "../provider/AuthProvider";
@@ -10,17 +12,21 @@ const MyAddedVisa = () => {
   const { user } = useContext(AuthContext);
   const [visas, setVisas] = useState([]);
   const [selectedVisa, setSelectedVisa] = useState(null);
+  const [loading, setLoading] = useState(true); // New loading state
   const email = user?.email;
 
   useEffect(() => {
     if (email) {
+      setLoading(true);
       fetch(`${import.meta.env.VITE_API_BASE_URL}/addedvisas/${email}`)
         .then((res) => res.json())
         .then((data) => {
           setVisas(data);
+          setLoading(false); 
         })
         .catch((err) => {
           console.error("Error fetching data:", err);
+          setLoading(false);
         });
     }
   }, [email]);
@@ -63,20 +69,12 @@ const MyAddedVisa = () => {
               });
             }
           });
-        // console.log("Log Deleted:", id);
       }
     });
   };
 
   const handleModalClose = () => {
     setSelectedVisa(null);
-  };
-
-  const handleModalSubmit = (id, updatedData) => {
-    console.log("Updated Visa:", id, updatedData);
-    
-    // Update visa in the database
-    handleModalClose();
   };
 
   const cardBgColor = theme === "dark" ? "bg-gray-800" : "bg-white";
@@ -88,13 +86,17 @@ const MyAddedVisa = () => {
 
   return (
     <div
-      className={`min-h-screen ${
-        theme === "dark" ? "bg-gray-900" : "bg-gray-100"
-      } p-5`}
+      className={`min-h-screen ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"} p-5`}
     >
       <h1 className={`text-2xl font-bold ${textColor} mb-6`}>My Added Visas</h1>
-      {visas.length === 0 ? (
-        // Show "No Data Found" when there are no visas
+
+      {/* Conditionally render the loader while fetching data */}
+      {loading ? (
+        <div className="flex justify-center items-center">
+          <Loader /> {/* Assuming you have a Loader component */}
+        </div>
+      ) : visas.length === 0 ? (
+        
         <div className={`text-center text-red-500 text-lg font-medium`}>
           No Data Found
         </div>
@@ -151,11 +153,7 @@ const MyAddedVisa = () => {
         </div>
       )}
       {selectedVisa && (
-        <UpdateModal
-          visa={selectedVisa}
-          closeModal={handleModalClose}
-          onSubmit={handleModalSubmit}
-        />
+        <UpdateModal visa={selectedVisa} closeModal={handleModalClose} />
       )}
     </div>
   );

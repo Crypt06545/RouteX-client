@@ -50,7 +50,7 @@ const LatestVisas = () => {
         <div className="text-center text-xl text-red-500">No data found.</div>
       ) : (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {visas.map((visa) => (
               <div
                 key={visa?._id}
@@ -65,41 +65,42 @@ const LatestVisas = () => {
                   <h3 className="text-2xl font-semibold text-emerald-400 mb-2">
                     {visa?.countryName}
                   </h3>
-                  <p className="mb-1">
-                    <strong>Visa Type:</strong> {visa?.visaType}
-                  </p>
-                  <p className="mb-1">
-                    <strong>Processing Time:</strong> {visa?.processingTime}{" "}
-                    days
-                  </p>
-                  <p className="mb-1">
-                    <strong>Fee:</strong> ${visa?.fee}
-                  </p>
-                  <p className="mb-1">
-                    <strong>Validity:</strong> {visa?.validity} months
-                  </p>
-                  <p className="mb-1">
-                    <strong>Application Method:</strong>{" "}
-                    {visa?.applicationMethod}
-                  </p>
+                  <div className="h-[350px]" >
+                    <p className="mb-1">
+                      <strong>Visa Type:</strong> {visa?.visaType}
+                    </p>
+                    <p className="mb-1">
+                      <strong>Processing Time:</strong> {visa?.processingTime}{" "}
+                      days
+                    </p>
+                    <p className="mb-1">
+                      <strong>Fee:</strong> ${visa?.fee}
+                    </p>
+                    <p className="mb-1">
+                      <strong>Validity:</strong> {visa?.validity} months
+                    </p>
+                    <p className="mb-1">
+                      <strong>Application Method:</strong>{" "}
+                      {visa?.applicationMethod}
+                    </p>
 
-                  {/* New Section: Description */}
-                  <p className="mb-4">
-                    <strong>Description:</strong> {visa?.description}
-                  </p>
+                    {/* New Section: Description */}
+                    <p className="mb-4">
+                      <strong>Description:</strong> {visa?.description}
+                    </p>
 
-                  {/* New Section: Required Documents */}
-                  <div>
-                    <strong>Required Documents:</strong>
-                    <ul className="list-disc pl-6">
-                      {visa.requiredDocuments.map((doc, index) => (
-                        <li key={index} className="mb-2">
-                          {doc}
-                        </li>
-                      ))}
-                    </ul>
+                    {/* New Section: Required Documents */}
+                    <div>
+                      <strong>Required Documents:</strong>
+                      <ul className="list-disc pl-6">
+                        {visa.requiredDocuments.map((doc, index) => (
+                          <li key={index} className="mb-2">
+                            {doc}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-
                   {/* See Details Button */}
                   <button
                     className={`${buttonClass} text-white py-2 px-4 rounded w-full mt-4`}

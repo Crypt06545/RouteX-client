@@ -7,21 +7,27 @@ const AllVisa = () => {
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
   const [visas, setVisas] = useState([]);
-  const [loading, setLoading] = useState(true); // Loader state to track loading process
+  const [loading, setLoading] = useState(true);
+  const [selectedVisaType, setSelectedVisaType] = useState("");
 
   useEffect(() => {
     const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/allvisas`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setVisas(data); // Load only 6 latest visas
-        setLoading(false); // Hide the loader once data is fetched
+        setVisas(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
         setLoading(false);
       });
   }, []);
+
+  // Filter visas based on the selected visa type
+  const filteredVisas = selectedVisaType
+    ? visas.filter((visa) => visa?.visaType === selectedVisaType)
+    : visas;
 
   const handleDetails = (id) => {
     navigate(`/visa-details/${id}`);
@@ -41,17 +47,35 @@ const AllVisa = () => {
     <div className={`min-h-screen p-8 ${containerClass}`}>
       <h2 className="text-3xl font-bold text-center mb-8">All Visas</h2>
 
+      {/* Dropdown menu for visa type filter */}
+      <div className="mb-6 text-center">
+        <label htmlFor="visaType" className="mr-2 font-semibold">
+          Filter by Visa Type:
+        </label>
+        <select
+          id="visaType"
+          value={selectedVisaType}
+          onChange={(e) => setSelectedVisaType(e.target.value)}
+          className="border px-4 py-2 rounded"
+        >
+          <option value="">All Visa Types</option>
+          <option value="Student Visa">Student Visa</option>
+          <option value="Official visa">Official visa</option>
+          <option value="Tourist Visa">Tourist Visa</option>
+        </select>
+      </div>
+
       {/* Loader */}
       {loading ? (
         <Loader />
-      ) : visas.length === 0 ? (
-        // Display "No Data Found" if visas array is empty
+      ) : filteredVisas.length === 0 ? (
+        // Display "No Data Found" if filtered visas array is empty
         <div className="text-center text-xl font-medium text-red-500">
           No Data Found
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {visas.map((visa) => (
+          {filteredVisas.map((visa) => (
             <div
               key={visa?._id}
               className={`shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 ${cardClass}`}
