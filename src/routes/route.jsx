@@ -29,10 +29,6 @@ const router = createBrowserRouter([
             <VisaDetails />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(
-            `${import.meta.env.VITE_API_BASE_URL}/visa-details/${params.id}`
-          ),
       },
       {
         path: "/add-visa",

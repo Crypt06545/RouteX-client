@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Loader";
-import { ThemeContext } from "../provider/ThemeProvider"; // Import ThemeContext
+import { ThemeContext } from "../provider/ThemeProvider";
 import ApplyModal from "../components/ApplyModal";
 
 const VisaDetails = () => {

@@ -29,48 +29,6 @@ const VisaApplication = () => {
     }
   }, [email]);
 
-  // const handleDelete = (applicationId) => {
-  //   // Show confirmation popup before deletion
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "You won't be able to revert this!",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, delete it!",
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       // If user confirms, perform the DELETE request
-  //       fetch(`${import.meta.env.VITE_API_BASE_URL}/myvisas/${applicationId}`, {
-  //         method: "DELETE",
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           // Show success message after deletion
-  //           Swal.fire({
-  //             title: "Deleted!",
-  //             text: "Your visa application has been deleted.",
-  //             icon: "success",
-  //           });
-  //           setVisaApplications((prevApplications) =>
-  //             prevApplications.filter(
-  //               (application) => application._id !== applicationId
-  //             )
-  //           );
-  //         })
-  //         .catch((err) => {
-  //           console.error("Error deleting visa application:", err);
-  //           Swal.fire({
-  //             title: "Error!",
-  //             text: "There was an issue deleting the visa application.",
-  //             icon: "error",
-  //           });
-  //         });
-  //     }
-  //   });
-  // };
-
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -82,12 +40,37 @@ const VisaApplication = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
-        console.log("deleted ", id);
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/rmyapplication/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              setVisaApplications((prevApplications) =>
+                prevApplications.filter((application) => application._id !== id)
+              );
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Visa Application has been deleted.",
+                icon: "success",
+              });
+              // console.log("Deleted ", id);
+            } else {
+              Swal.fire({
+                title: "Error!",
+                text: "Failed to delete the Visa.",
+                icon: "error",
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting file:", error);
+            Swal.fire({
+              title: "Error!",
+              text: "Something went wrong.",
+              icon: "error",
+            });
+          });
       }
     });
   };
