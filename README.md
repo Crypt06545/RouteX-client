@@ -1,6 +1,6 @@
 # RouteX
 
-**Live Site**: [Visa Navigator](https://visa-portal.netlify.app)
+**Live Site**: [RouteX](https://visa-portal.netlify.app)
 
 ## Overview
 
@@ -51,5 +51,5 @@ To get a local copy of the project up and running, follow these steps:
 
 1. Clone the client repository:
    ```bash
-   git clone https://github.com/yourusername/visa-navigator-client.git
+   git clone https://github.com/yourusername-client.git
    ```
