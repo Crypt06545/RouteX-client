@@ -33,7 +33,7 @@ const Footer = () => {
               <div>
                 <img src={FLogo} alt="Logo" />
               </div>
-              <h1 className="text-3xl font-extrabold">VisaPortal</h1>
+              <h1 className="text-3xl font-extrabold">RouteX</h1>
             </div>
             <p className="text-sm mt-2">
               Corporate business typically refers to large-scale enterprises or

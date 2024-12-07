@@ -36,7 +36,7 @@ const Navbar = () => {
             theme === "dark" ? "text-white" : "text-[#034833]"
           } text-2xl font-bold`}
         >
-          VisaPortal
+          RouteX
         </div>
       </div>
 
