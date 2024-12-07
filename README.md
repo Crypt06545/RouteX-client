@@ -21,6 +21,20 @@ With features like real-time visa application tracking, secure user authenticati
 
 ## Technologies Used
 
+<table>
+    <tr>
+        <td>
+            <a href="#"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" alt="React" width="30" height="30" /></a>
+        </td>
+        <td>
+            <a href="#"><img src="https://user-images.githubusercontent.com/99184393/179383376-874f547c-4e6f-4826-850e-706b009e7e2b.png" alt="Tailwind CSS" width="30" height="30" /></a>
+        </td>
+        <td>
+            <a href="#"><img src="https://user-images.githubusercontent.com/25181517/189716855-2c69ca7a-5149-4647-936d-780610911353.png" alt="Recharts" width="30" height="30" /></a>
+        </td>
+    </tr>
+</table>
+
 - **Frontend**: React, Tailwind CSS, Lottie React, React Router
 - **Backend**: Node.js, Express.js, MongoDB, Firebase Authentication
 
