@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../provider/ThemeProvider";
 import Loader from "./Loader";
+import "animate.css";
 
 const LatestVisas = () => {
   const navigate = useNavigate();
@@ -42,19 +43,23 @@ const LatestVisas = () => {
 
   return (
     <div className={`p-8 ${containerClass}`}>
-      <h2 className="text-3xl font-bold text-center mb-8">Latest Visas</h2>
+      <h2 className="text-3xl font-bold text-center mb-8 animate__animated animate__backInLeft">
+        Latest Visas
+      </h2>
       {isLoading ? (
         <Loader />
       ) : visas.length === 0 ? (
         // No data found validation
-        <div className="text-center text-xl text-red-500">No data found.</div>
+        <div className="text-center text-xl text-red-500 animate__animated animate__backInLeft">
+          No data found.
+        </div>
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {visas.map((visa) => (
               <div
                 key={visa?._id}
-                className={`shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 ${cardClass}`}
+                className={`shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 ${cardClass} animate__animated animate__backInLeft`}
               >
                 <img
                   src={visa?.countryImage}

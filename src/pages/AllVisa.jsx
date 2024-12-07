@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../provider/ThemeProvider";
 import Loader from "../components/Loader";
+import "animate.css";
+
 
 const AllVisa = () => {
   const navigate = useNavigate();
@@ -45,10 +47,10 @@ const AllVisa = () => {
 
   return (
     <div className={`min-h-screen p-8 ${containerClass}`}>
-      <h2 className="text-3xl font-bold text-center mb-8">All Visas</h2>
+      <h2 className="text-3xl font-bold text-center mb-8 animate__animated animate__backInLeft">All Visas</h2>
 
       {/* Dropdown menu for visa type filter */}
-      <div className="mb-6 text-center">
+      <div className="mb-6 text-center animate__animated animate__backInLeft">
         <label htmlFor="visaType" className="mr-2 font-semibold">
           Filter by Visa Type:
         </label>
@@ -78,7 +80,7 @@ const AllVisa = () => {
           {filteredVisas.map((visa) => (
             <div
               key={visa?._id}
-              className={`shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 ${cardClass}`}
+              className={`shadow-md animate__animated animate__backInLeft rounded-lg overflow-hidden transition-transform transform hover:scale-105 ${cardClass}`}
             >
               <img
                 src={visa?.countryImage}

@@ -4,7 +4,7 @@ import { ThemeContext } from "../provider/ThemeProvider";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import Loader from "../components/Loader";
 import Swal from "sweetalert2";
-
+import 'animate.css';
 const VisaApplication = () => {
   const { user } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
@@ -133,7 +133,7 @@ const VisaApplication = () => {
       filteredApplications.map((application) => (
         <div
           key={application?._id}
-          className={`flex flex-col md:flex-row ${containerClass} rounded-lg p-6 mb-6 shadow-lg space-y-4 md:space-y-0 md:space-x-8`}
+          className={`flex animate__animated animate__zoomIn flex-col md:flex-row ${containerClass} rounded-lg p-6 mb-6 shadow-lg space-y-4 md:space-y-0 md:space-x-8`}
         >
           <div className="flex-shrink-0">
             <img

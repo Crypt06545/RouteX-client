@@ -1,5 +1,5 @@
 import Loader from "../components/Loader";
-
+import 'animate.css';
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../provider/ThemeProvider";
 import { AuthContext } from "../provider/AuthProvider";
@@ -101,7 +101,7 @@ const MyAddedVisa = () => {
           No Data Found
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid animate__animated animate__zoomIn grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {visas.map((visa) => (
             <div
               key={visa._id}
