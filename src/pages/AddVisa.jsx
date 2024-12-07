@@ -163,6 +163,7 @@ const AddVisa = () => {
                   value="Valid passport"
                   onChange={handleCheckboxChange}
                   className="mr-2"
+                  required
                 />
                 Valid Passport
               </label>
@@ -181,6 +182,7 @@ const AddVisa = () => {
                   value="Recent passport-sized photograph"
                   onChange={handleCheckboxChange}
                   className="mr-2"
+                  required
                 />
                 Recent Passport-sized Photograph
               </label>

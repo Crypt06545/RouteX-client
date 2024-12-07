@@ -59,9 +59,9 @@ const AllVisa = () => {
           className="border px-4 py-2 rounded"
         >
           <option value="">All Visa Types</option>
-          <option value="Student Visa">Student Visa</option>
-          <option value="Official visa">Official visa</option>
           <option value="Tourist Visa">Tourist Visa</option>
+          <option value="Student Visa">Student Visa</option>
+          <option value="Official Visa">Official Visa</option>
         </select>
       </div>
 

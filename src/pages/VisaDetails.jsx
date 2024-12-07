@@ -48,7 +48,7 @@ const VisaDetails = () => {
         className={`${cardClass} max-w-4xl w-full sm:max-w-md md:max-w-lg lg:max-w-4xl shadow-lg rounded-lg overflow-hidden`}
       >
         <img
-          className="w-full h-64 object-cover"
+          className="w-full h-[400px] object-cover"
           src={visaDetails.countryImage}
           alt="Country"
         />

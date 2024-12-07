@@ -5,9 +5,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/autoplay";
 
 // Import required modules
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
+
+// Import Simple Typewriter
+import { Typewriter } from "react-simple-typewriter";
 
 export default function Banner() {
   return (
@@ -16,73 +20,94 @@ export default function Banner() {
         pagination={{
           dynamicBullets: true,
         }}
-        modules={[Pagination]}
-        className="mySwiper"
+        modules={[Pagination, Autoplay]}
         loop={true}
         autoplay={{
-          delay: 5000, // Slide transition time (5 seconds)
+          delay: 5000,
           disableOnInteraction: false,
-          delayOnStart: 2000, // Delay before starting autoplay (2 seconds)
         }}
+        className="mySwiper"
       >
+        {/* Slide 1 */}
         <SwiperSlide>
           <div
-            className="h-[500px] bg-cover bg-center" // Increased height
+            className="h-[500px] bg-cover bg-center"
             style={{
               backgroundImage:
-                "url(https://img.freepik.com/free-photo/top-view-tourist-objects-frame-with-copy-space_23-2148786099.jpg?t=st=1733292870~exp=1733296470~hmac=c2e3ca76c2e97923b469bef278513b5c7ce62390265d00094ff2d6fa3426a99e&w=996)",
+                "url(https://img.freepik.com/free-photo/top-view-tourist-objects-frame-with-copy-space_23-2148786099.jpg?w=996)",
             }}
           >
             <div className="flex items-center justify-center h-full bg-black bg-opacity-50 text-white text-center p-5">
               <div>
-                <h2 className="text-4xl font-bold">Welcome to Our Service</h2>
+                <h2 className="text-4xl font-bold">
+                  <Typewriter
+                    words={["Simplify Your Visa Process"]}
+                    loop={false}
+                    cursor
+                  />
+                </h2>
                 <p className="mt-2 text-lg">
-                  Experience the best service with us.
+                  Apply for tourist, student, or work visas with ease. Let us
+                  handle the complexity for you.
                 </p>
               </div>
             </div>
           </div>
         </SwiperSlide>
 
+        {/* Slide 2 */}
         <SwiperSlide>
           <div
-            className="h-[500px] bg-cover bg-center" // Increased height
+            className="h-[500px] bg-cover bg-center"
             style={{
               backgroundImage:
-                "url(https://img.freepik.com/free-photo/visa-application-composition-with-american-flag_23-2149117752.jpg?t=st=1733293470~exp=1733297070~hmac=9cbac3340f0c4618e358f8219c433dfc84631b6a8dc7663f0136e8e94f98c742&w=740)",
+                "url(https://img.freepik.com/free-photo/visa-application-composition-with-american-flag_23-2149117752.jpg?w=740)",
             }}
           >
             <div className="flex items-center justify-center h-full bg-black bg-opacity-50 text-white text-center p-5">
               <div>
-                <h2 className="text-4xl font-bold">Quality Products for You</h2>
+                <h2 className="text-4xl font-bold">
+                  <Typewriter
+                    words={["Explore Opportunities Worldwide"]}
+                    loop={false}
+                    cursor
+                  />
+                </h2>
                 <p className="mt-2 text-lg">
-                  Check out our premium products now.
+                  Unlock global opportunities with our expert visa consultancy
+                  services tailored for every need.
                 </p>
               </div>
             </div>
           </div>
         </SwiperSlide>
 
+        {/* Slide 3 */}
         <SwiperSlide>
           <div
-            className="h-[500px] bg-cover bg-center" // Increased height
+            className="h-[500px] bg-cover bg-center"
             style={{
               backgroundImage:
-                "url(https://img.freepik.com/free-photo/visa-application-different-countries-arrangement_23-2149117826.jpg?t=st=1733293508~exp=1733297108~hmac=1a9d3edc835286bef558b1eed5982a7ae2d5176f00ae41f6712627c7ec3d2463&w=740)",
+                "url(https://img.freepik.com/free-photo/visa-application-different-countries-arrangement_23-2149117826.jpg?w=740)",
             }}
           >
             <div className="flex items-center justify-center h-full bg-black bg-opacity-50 text-white text-center p-5">
               <div>
-                <h2 className="text-4xl font-bold">Join Us Today</h2>
+                <h2 className="text-4xl font-bold">
+                  <Typewriter
+                    words={["Join Thousands of Happy Clients"]}
+                    loop={false}
+                    cursor
+                  />
+                </h2>
                 <p className="mt-2 text-lg">
-                  Become a member and enjoy exclusive offers.
+                  Trusted by thousands, we provide seamless visa assistance for
+                  individuals and businesses alike.
                 </p>
               </div>
             </div>
           </div>
         </SwiperSlide>
-
-        {/* Add more slides as needed */}
       </Swiper>
     </div>
   );

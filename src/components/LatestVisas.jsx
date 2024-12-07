@@ -65,7 +65,7 @@ const LatestVisas = () => {
                   <h3 className="text-2xl font-semibold text-emerald-400 mb-2">
                     {visa?.countryName}
                   </h3>
-                  <div className="h-[350px]" >
+                  <div className="h-[350px]">
                     <p className="mb-1">
                       <strong>Visa Type:</strong> {visa?.visaType}
                     </p>
@@ -86,7 +86,9 @@ const LatestVisas = () => {
 
                     {/* New Section: Description */}
                     <p className="mb-4">
-                      <strong>Description:</strong> {visa?.description}
+                      <strong>Description:</strong>{" "}
+                      {visa?.description?.split(" ").slice(0, 10).join(" ")}
+                      ......
                     </p>
 
                     {/* New Section: Required Documents */}
