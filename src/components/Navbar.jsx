@@ -28,7 +28,7 @@ const Navbar = () => {
         theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-800"
       } shadow-sm`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo and brand */}
           <div className="flex-shrink-0 flex items-center">
