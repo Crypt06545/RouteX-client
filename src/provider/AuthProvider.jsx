@@ -10,6 +10,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import app from "../firebase/Firebase.config";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 
@@ -17,7 +18,7 @@ const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   // console.log(user);
-  
+
   const [loading, setLoading] = useState(true);
 
   // Sign up a user
@@ -48,9 +49,13 @@ const AuthProvider = ({ children }) => {
   // Log out a user
   const logOut = () => {
     setLoading(true);
-    return signOut(auth).finally(() => {
-      setLoading(false);
-    });
+    return signOut(auth)
+      .then(() => {
+        toast.success("Logged out successfully!");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   // Observe user authentication state

@@ -1,22 +1,24 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../provider/ThemeProvider";
 import { RiDashboardLine } from 'react-icons/ri';
 import { HiOutlineDocumentAdd, HiOutlineDocumentText, HiOutlineClipboardList } from 'react-icons/hi';
 import { FiLogOut, FiSun, FiMoon } from 'react-icons/fi';
-
+import { AuthContext } from "../provider/AuthProvider";
 
 const DashboardLayout = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+   const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  // Theme classes matching VisaDetails exactly
   const containerClass = theme === "dark" 
     ? "bg-gray-900 text-gray-100" 
     : "bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800";
-    
+
   const cardClass = theme === "dark" 
     ? "bg-gray-800 border-gray-700" 
     : "bg-white border-gray-200";
-    
+
   const highlightClass = theme === "dark" 
     ? "bg-emerald-800/30 border-emerald-500" 
     : "bg-emerald-100/80 border-emerald-400";
@@ -33,7 +35,7 @@ const DashboardLayout = () => {
 
   return (
     <div className={`${containerClass} flex flex-col min-h-screen`}>
-      {/* Header with theme toggle */}
+      {/* Header */}
       <header className={`flex items-center justify-between px-4 md:px-8 py-3 ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b`}>
         <a href="/" className="flex items-center">
           <img 
@@ -47,7 +49,6 @@ const DashboardLayout = () => {
         </a>
         
         <div className="flex items-center gap-4">
-          {/* Theme toggle button */}
           <button 
             onClick={toggleTheme}
             className={`p-2 rounded-full ${theme === 'dark' ? 'bg-gray-700 text-amber-300 hover:bg-gray-600' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
@@ -57,7 +58,7 @@ const DashboardLayout = () => {
           </button>
           
           <p className={`${textSecondary} hidden sm:block`}>Hi! Admin</p>
-          <button className={`flex items-center gap-1 border rounded-full text-sm px-4 py-1 ${theme === 'dark' ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-600 hover:bg-gray-50'} transition-colors`}>
+          <button onClick={logOut} className={`flex items-center gap-1 border rounded-full text-sm px-4 py-1 ${theme === 'dark' ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-600 hover:bg-gray-50'} transition-colors`}>
             <FiLogOut className="w-4 h-4" />
             <span>Logout</span>
           </button>
@@ -85,7 +86,6 @@ const DashboardLayout = () => {
             ))}
           </nav>
           
-          {/* Sidebar footer */}
           <div className={`p-4 border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'} hidden md:block`}>
             <p className={`text-xs ${textTertiary}`}>Visa Portal v1.0.0</p>
           </div>
@@ -93,6 +93,24 @@ const DashboardLayout = () => {
 
         {/* Main Content Area */}
         <main className="flex-1 overflow-auto p-4 md:p-6">
+          
+          {/* ✅ Back to Home Button */}
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={() => navigate("/")}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors
+                ${theme === 'dark'
+                  ? 'bg-gray-700 text-gray-100 hover:bg-gray-600'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}
+              `}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m4 0h5a2 2 0 002-2v-5a2" />
+              </svg>
+              Back to Home
+            </button>
+          </div>
+
           <div className={`${cardClass} rounded-lg border shadow-sm p-6`}>
             <h1 className={`text-2xl font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
               Welcome to Visa Dashboard
@@ -100,8 +118,7 @@ const DashboardLayout = () => {
             <p className={`${textSecondary} mt-2`}>
               Manage your visa applications and listings
             </p>
-            
-            {/* Quick Stats - styled like VisaDetails highlight section */}
+
             <div className={`${highlightClass} border rounded-lg p-6 mt-6 grid grid-cols-2 gap-4`}>
               <div className="flex items-center">
                 <HiOutlineDocumentAdd className="text-emerald-500 mr-3 text-xl" />
@@ -118,8 +135,7 @@ const DashboardLayout = () => {
                 </div>
               </div>
             </div>
-            
-            {/* Recent Activity Section */}
+
             <div className="mt-8">
               <h2 className={`text-xl font-semibold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
                 Recent Activity
