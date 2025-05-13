@@ -11,14 +11,11 @@ const LatestVisas = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Start loading when the component mounts
     setIsLoading(true);
-
-    // Fetch data
     fetch(`${import.meta.env.VITE_API_BASE_URL}/latestvisas`)
       .then((response) => response.json())
       .then((data) => {
-        setVisas(data); // Set visas data
+        setVisas(data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -31,104 +28,98 @@ const LatestVisas = () => {
     navigate(`/visa-details/${id}`);
   };
 
-  // Conditional classes for dark and light modes
+  // Theme classes
   const containerClass =
-    theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-black";
+    theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-800";
   const cardClass =
-    theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-800";
+    theme === "dark" ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-50";
   const buttonClass =
     theme === "dark"
       ? "bg-emerald-600 hover:bg-emerald-500"
       : "bg-emerald-600 hover:bg-emerald-700";
 
   return (
-    <div className={`p-8 ${containerClass}`}>
-      <h2 className="text-3xl font-bold text-center mb-8 animate__animated animate__backInLeft">
-        Latest Visas
-      </h2>
-      {isLoading ? (
-        <Loader />
-      ) : visas.length === 0 ? (
-        // No data found validation
-        <div className="text-center text-xl text-red-500 animate__animated animate__backInLeft">
-          No data found.
-        </div>
-      ) : (
-        <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {visas.map((visa) => (
-              <div
-                key={visa?._id}
-                className={`shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 ${cardClass} animate__animated animate__backInLeft`}
-              >
-                <img
-                  src={visa?.countryImage}
-                  alt={visa?.countryName}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-2xl font-semibold text-emerald-400 mb-2">
-                    {visa?.countryName}
-                  </h3>
-                  <div className="h-[350px]">
-                    <p className="mb-1">
-                      <strong>Visa Type:</strong> {visa?.visaType}
-                    </p>
-                    <p className="mb-1">
-                      <strong>Processing Time:</strong> {visa?.processingTime}{" "}
-                      days
-                    </p>
-                    <p className="mb-1">
-                      <strong>Fee:</strong> ${visa?.fee}
-                    </p>
-                    <p className="mb-1">
-                      <strong>Validity:</strong> {visa?.validity} months
-                    </p>
-                    <p className="mb-1">
-                      <strong>Application Method:</strong>{" "}
-                      {visa?.applicationMethod}
-                    </p>
+    <div className={`py-12 px-4 sm:px-6 lg:px-8 ${containerClass}`}>
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12 animate__animated animate__fadeIn">
+          Latest Visas
+        </h2>
 
-                    {/* New Section: Description */}
-                    <p className="mb-4">
-                      <strong>Description:</strong>{" "}
-                      {visa?.description?.split(" ").slice(0, 10).join(" ")}
-                      ......
-                    </p>
-
-                    {/* New Section: Required Documents */}
-                    <div>
-                      <strong>Required Documents:</strong>
-                      <ul className="list-disc pl-6">
-                        {visa.requiredDocuments.map((doc, index) => (
-                          <li key={index} className="mb-2">
-                            {doc}
-                          </li>
-                        ))}
-                      </ul>
+        {isLoading ? (
+          <Loader />
+        ) : visas.length === 0 ? (
+          <div className="text-center text-xl text-red-500 py-12">
+            No visa data available at the moment.
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {visas.map((visa) => (
+                <div
+                  key={visa?._id}
+                  className={`rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg ${cardClass} animate__animated animate__fadeInUp`}
+                >
+                  <div className="relative h-48">
+                    <img
+                      src={visa?.countryImage}
+                      alt={visa?.countryName}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                      <h3 className="text-2xl font-bold text-white">
+                        {visa?.countryName}
+                      </h3>
+                      <p className="text-emerald-300 font-medium">
+                        {visa?.visaType}
+                      </p>
                     </div>
                   </div>
-                  {/* See Details Button */}
-                  <button
-                    className={`${buttonClass} text-white py-2 px-4 rounded w-full mt-4`}
-                    onClick={() => handleDetails(visa?._id)}
-                  >
-                    See Details
-                  </button>
+
+                  <div className="p-6">
+                    <div className="flex justify-between mb-3">
+                      <div>
+                        <p className="text-sm text-gray-500">Processing Time</p>
+                        <p className="font-medium">{visa?.processingTime} days</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500">Fee</p>
+                        <p className="font-medium">${visa?.fee}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500">Validity</p>
+                        <p className="font-medium">{visa?.validity} months</p>
+                      </div>
+                    </div>
+
+                    <p className="text-sm line-clamp-3 mb-4">
+                      {visa?.description}
+                    </p>
+
+                    <button
+                      onClick={() => handleDetails(visa?._id)}
+                      className={`${buttonClass} text-white py-2 px-4 rounded-lg w-full transition-colors duration-200`}
+                    >
+                      View Details
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <button
-              className={`${buttonClass} text-white py-3 px-8 rounded-lg transition-colors duration-300`}
-              onClick={() => navigate("/all-visas")}
-            >
-              See All Visas
-            </button>
-          </div>
-        </>
-      )}
+              ))}
+            </div>
+
+            <div className="text-center mt-10">
+              <button
+                onClick={() => navigate("/all-visas")}
+                className={`${buttonClass} text-white font-medium py-3 px-8 rounded-lg inline-flex items-center transition-colors duration-200`}
+              >
+                See All Visas
+                {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg> */}
+              </button>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
