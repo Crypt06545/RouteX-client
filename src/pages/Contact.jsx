@@ -5,8 +5,9 @@ import {
   FaLocationArrow,
   FaPaperPlane,
 } from "react-icons/fa";
-import { ThemeContext } from "../provider/ThemeProvider";
+
 import "animate.css";
+import { ThemeContext } from "../provider/ThemeProvider";
 
 const Contact = () => {
   const { theme } = useContext(ThemeContext);

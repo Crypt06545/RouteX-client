@@ -2,7 +2,6 @@ import React from "react";
 import Banner from "../components/Banner";
 import LatestVisas from "../components/LatestVisas";
 
-import Contact from "../components/Contact";
 import Success from "../components/Success";
 
 const Home = () => {
@@ -11,7 +10,6 @@ const Home = () => {
       <Banner />
       <LatestVisas />
       <Success />
-      <Contact />
     </div>
   );
 };
