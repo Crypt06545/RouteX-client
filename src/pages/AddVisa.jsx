@@ -1,9 +1,11 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import Swal from "sweetalert2";
 import { ThemeContext } from "../provider/ThemeProvider";
 import { AuthContext } from "../provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const AddVisa = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   // console.log(user?.displayName);
 
@@ -62,6 +64,7 @@ const AddVisa = () => {
             title: "Visa Added Successfully!",
             text: "The visa data has been Added",
           });
+          navigate("/dashboard/my-added-visas");
         }
       });
 

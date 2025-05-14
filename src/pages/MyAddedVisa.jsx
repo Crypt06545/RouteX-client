@@ -85,77 +85,72 @@ const MyAddedVisa = () => {
     theme === "dark" ? "bg-red-700 text-white" : "bg-red-200 text-red-900";
 
   return (
-    <div
-      className={`min-h-screen ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"} p-5`}
-    >
-      <h1 className={`text-2xl font-bold ${textColor} mb-6`}>My Added Visas</h1>
+<div className={`min-h-screen ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"} p-5`}>
+  <h1 className={`text-2xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+    My Added Visas
+  </h1>
 
-      {/* Conditionally render the loader while fetching data */}
-      {loading ? (
-        <div className="flex justify-center items-center">
-          <Loader /> {/* Assuming you have a Loader component */}
-        </div>
-      ) : visas.length === 0 ? (
-        
-        <div className={`text-center text-red-500 text-lg font-medium`}>
-          No Data Found
-        </div>
-      ) : (
-        <div className="grid animate__animated animate__zoomIn grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {visas.map((visa) => (
-            <div
-              key={visa._id}
-              className={`shadow-md rounded-lg overflow-hidden ${cardBgColor} p-4`}
-            >
-              <img
-                src={visa.countryImage}
-                alt={visa.countryName}
-                className="w-full h-40 object-cover rounded-md"
-              />
-              <div className={`mt-4 ${textColor}`}>
-                <h2 className="text-xl font-bold mb-2">{visa.countryName}</h2>
-                <p>
-                  <span className="font-semibold">Visa Type:</span>{" "}
-                  {visa.visaType}
-                </p>
-                <p>
-                  <span className="font-semibold">Processing Time:</span>{" "}
-                  {visa.processingTime} Days
-                </p>
-                <p>
-                  <span className="font-semibold">Fee:</span> ${visa.fee}
-                </p>
-                <p>
-                  <span className="font-semibold">Validity:</span>{" "}
-                  {visa.validity} Months
-                </p>
-                <p>
-                  <span className="font-semibold">Application Method:</span>{" "}
-                  {visa.applicationMethod}
-                </p>
-              </div>
-              <div className="flex justify-between mt-4">
-                <button
-                  className={`px-4 py-2 flex items-center gap-2 rounded-lg font-semibold hover:shadow-md ${buttonUpdateColor}`}
-                  onClick={() => handleUpdate(visa)}
-                >
-                  <MdUpdate /> Update
-                </button>
-                <button
-                  className={`px-4 py-2 flex items-center gap-2 rounded-lg font-semibold hover:shadow-md ${buttonDeleteColor}`}
-                  onClick={() => handleDelete(visa._id)}
-                >
-                  <MdDelete /> Delete
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-      {selectedVisa && (
-        <UpdateModal visa={selectedVisa} closeModal={handleModalClose} />
-      )}
+  {loading ? (
+    <div className="flex justify-center items-center">
+      <Loader />
     </div>
+  ) : visas.length === 0 ? (
+    <div className="text-center text-red-500 text-lg font-medium">No Data Found</div>
+  ) : (
+    <div className="overflow-x-auto animate__animated animate__fadeIn">
+      <table className={`table w-full rounded-lg shadow-md ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-900"}`}>
+        <thead className={`${theme === "dark" ? "bg-gray-700 text-white" : "bg-gray-200 text-gray-900"}`}>
+          <tr className="text-sm uppercase tracking-wider">
+            <th className="py-3 px-4">#</th>
+            <th className="py-3 px-4">Image</th>
+            <th className="py-3 px-4">Country</th>
+            <th className="py-3 px-4">Fee</th>
+            <th className="py-3 px-4">Validity (Months)</th>
+            <th className="py-3 px-4 text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {visas.map((visa, index) => (
+            <tr key={visa._id} className={`${theme === "dark" ? "hover:bg-gray-700" : "hover:bg-gray-100"} transition`}>
+              <td className="py-3 px-4 font-medium">{index + 1}</td>
+              <td className="py-3 px-4">
+                <div className="avatar">
+                  <div className="w-14 h-14 rounded-lg border border-gray-300">
+                    <img src={visa.countryImage} alt={visa.countryName} />
+                  </div>
+                </div>
+              </td>
+              <td className="py-3 px-4 font-semibold">{visa.countryName}</td>
+              <td className="py-3 px-4 font-bold">${visa.fee}</td>
+              <td className="py-3 px-4 font-medium">{visa.validity || 'N/A'}</td>
+              <td className="py-3 px-4">
+                <div className="flex gap-2 justify-center flex-wrap">
+                  <button
+                    className={`px-3 py-1 rounded-md flex items-center gap-1 font-semibold shadow-sm hover:shadow-md transition duration-200 ${theme === "dark" ? "bg-blue-700 text-white" : "bg-blue-200 text-blue-900"}`}
+                    onClick={() => handleUpdate(visa)}
+                  >
+                    <MdUpdate /> Update
+                  </button>
+                  <button
+                    className={`px-3 py-1 rounded-md flex items-center gap-1 font-semibold shadow-sm hover:shadow-md transition duration-200 ${theme === "dark" ? "bg-red-700 text-white" : "bg-red-200 text-red-900"}`}
+                    onClick={() => handleDelete(visa._id)}
+                  >
+                    <MdDelete /> Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  {selectedVisa && <UpdateModal visa={selectedVisa} closeModal={handleModalClose} />}
+</div>
+
+
+
   );
 };
 

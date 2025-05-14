@@ -77,8 +77,8 @@ const ApplyModal = ({ visaDetails }) => {
             title: "Applied Successfully!",
             text: "The apply data has been added successfully.",
           });
-
           document.getElementById("my_modal_5").close();
+          navigate('/dashboard/my-visa-applications')
         } else {
           Swal.fire({
             icon: "error",

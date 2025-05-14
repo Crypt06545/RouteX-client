@@ -2,11 +2,13 @@
   "desktop": [
     { "id": 1, "label": "Home", "to": "/" },
     { "id": 2, "label": "All Visas", "to": "/all-visas" },
-    { "id": 3, "label": "Contact", "to": "/contact" }
+    { "id": 3, "label": "Contact", "to": "/contact" },
+    { "id": 4, "label": "Team", "to": "/team" }
   ],
   "mobile": [
     { "id": 1, "label": "Home", "to": "/" },
     { "id": 2, "label": "All Visas", "to": "/all-visas" },
+    { "id": 3, "label": "Contact", "to": "/contact" },
     { "id": 3, "label": "Contact", "to": "/contact" }
   ]
 }

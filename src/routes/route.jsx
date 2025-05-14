@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 import VisaDetails from "../pages/VisaDetails";
 import Dashboard from "../pages/Dashboard";
 import Contact from "../pages/Contact";
+import Team from "../pages/Team";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: "/all-visas", element: <AllVisa /> },
       { path: "/contact", element: <Contact /> },
       { path: "/visa-details/:id", element: <VisaDetails /> },
+      { path: "/team", element: <Team /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
     ],
