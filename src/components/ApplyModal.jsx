@@ -1,15 +1,16 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { ThemeContext } from "../provider/ThemeProvider";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
-
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const ApplyModal = ({ visaDetails }) => {
   const { user } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
-
+  const navigate = useNavigate();
   const modalClass =
     theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black";
   const buttonClass =
@@ -36,6 +37,15 @@ const ApplyModal = ({ visaDetails }) => {
 
   const handleDateChange = (date) => {
     setApplyData({ ...applyData, selectedDate: date });
+  };
+  const handleOpenModal = () => {
+    if (!user) {
+      toast.warn("You should login first!");
+      navigate("/login");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    document.getElementById("my_modal_5").showModal();
   };
 
   const handleSubmit = (e) => {
@@ -68,7 +78,7 @@ const ApplyModal = ({ visaDetails }) => {
             text: "The apply data has been added successfully.",
           });
 
-          document.getElementById("my_modal_5").close(); // Close modal
+          document.getElementById("my_modal_5").close();
         } else {
           Swal.fire({
             icon: "error",
@@ -91,7 +101,7 @@ const ApplyModal = ({ visaDetails }) => {
     <div>
       <button
         className={`${buttonClass} px-6 py-2 mt-4 rounded-full font-semibold`}
-        onClick={() => document.getElementById("my_modal_5").showModal()}
+        onClick={handleOpenModal}
       >
         Apply for the visa
       </button>
