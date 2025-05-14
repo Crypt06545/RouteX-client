@@ -4,30 +4,30 @@ import { ThemeContext } from "../provider/ThemeProvider";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import Loader from "../components/Loader";
 import Swal from "sweetalert2";
-import 'animate.css';
+import "animate.css";
+
 const VisaApplication = () => {
   const { user } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
   const [visaApplications, setVisaApplications] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Loading state
-  const [searchTerm, setSearchTerm] = useState(""); // For search functionality
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredApplications, setFilteredApplications] = useState([]);
 
   const email = user?.email;
 
-  // fetch data
   useEffect(() => {
     if (email) {
       fetch(`${import.meta.env.VITE_API_BASE_URL}/myvisas/${email}`)
         .then((res) => res.json())
         .then((data) => {
-          setVisaApplications(data); // Set fetched data to state
-          setFilteredApplications(data); // Initialize filtered data
+          setVisaApplications(data);
+          setFilteredApplications(data);
           setIsLoading(false);
         })
         .catch((err) => {
           console.error("Error fetching data:", err);
-          setIsLoading(false); // Stop loading in case of error
+          setIsLoading(false);
         });
     }
   }, [email]);
@@ -62,11 +62,11 @@ const VisaApplication = () => {
           .then((response) => response.json())
           .then((data) => {
             if (data.deletedCount > 0) {
-              setVisaApplications((prevApplications) =>
-                prevApplications.filter((application) => application._id !== id)
+              setVisaApplications((prev) =>
+                prev.filter((application) => application._id !== id)
               );
-              setFilteredApplications((prevApplications) =>
-                prevApplications.filter((application) => application._id !== id)
+              setFilteredApplications((prev) =>
+                prev.filter((application) => application._id !== id)
               );
               Swal.fire({
                 title: "Deleted!",
@@ -93,107 +93,141 @@ const VisaApplication = () => {
     });
   };
 
-  // Determine background and text colors based on theme
-  const containerClass =
-    theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black";
-  const buttonClass =
-    "bg-red-600 hover:bg-red-700 text-white flex items-center space-x-2 px-6 py-2 rounded-full";
-
-  if (isLoading) {
-    return <Loader />; // Show loader while fetching data
-  }
+  if (isLoading) return <Loader />;
 
   return (
-    <div className="relative my-20 px-4">
-  {/* Title and Search Bar Section */}
-  <div className="flex flex-col sm:flex-row items-center justify-between mb-6 space-y-4 sm:space-y-0">
-    <h2 className="text-2xl font-bold">My Applied visa Details</h2>
-    <div className="flex items-center space-x-2">
-      <input
-        type="text"
-        placeholder="Search by country"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <button
-        onClick={handleSearch}
-        className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700"
-      >
-        Search
-      </button>
-    </div>
-  </div>
-
-  {/* Visa Applications Section */}
-  <div>
-    {filteredApplications.length === 0 ? (
-      <p className="text-2xl text-red-500">No visa applications found.</p>
-    ) : (
-      filteredApplications.map((application) => (
-        <div
-          key={application?._id}
-          className={`flex animate__animated animate__zoomIn flex-col md:flex-row ${containerClass} rounded-lg p-6 mb-6 shadow-lg space-y-4 md:space-y-0 md:space-x-8`}
-        >
-          <div className="flex-shrink-0">
-            <img
-              src={application?.visaDetails?.countryImage}
-              alt={application?.visaDetails?.countryName}
-              className="w-32 h-32 rounded-lg mb-4 md:mb-0"
-            />
-          </div>
-
-          <div className="flex-1">
-            <h3 className="font-semibold text-xl">
-              {application?.visaDetails?.countryName}
-            </h3>
-            <p className="text-sm text-gray-400">
-              {application?.visaDetails?.visaType}
-            </p>
-
-            <div className="mt-4 space-y-2">
-              <p className="text-lg font-semibold">
-                Processing Time: {application?.visaDetails?.processingTime} days
-              </p>
-              <p className="text-lg font-semibold">Fee: ${application?.fee}</p>
-              <p className="text-lg font-semibold">
-                Validity: {application?.visaDetails?.validity} months
-              </p>
-              <p className="text-lg font-semibold">
-                Application Method: {application?.visaDetails?.applicationMethod}
-              </p>
-            </div>
-
-            <div className="mt-4 text-sm text-gray-500">
-              <p>
-                <strong>Applicant Name:</strong> {application?.firstName}{" "}
-                {application?.lastName}
-              </p>
-              <p>
-                <strong>Applicant Email:</strong> {application?.email}
-              </p>
-              <p>
-                <strong>Applied On:</strong> {application?.applyDate}
-              </p>
-            </div>
-
-            <div className="mt-4 text-right">
-              <button
-                onClick={() => handleDelete(application?._id)}
-                className={buttonClass}
-              >
-                <RiDeleteBin2Fill />
-                <span>Cancel Application</span>
-              </button>
-            </div>
-          </div>
+    <div
+      className={`relative my-20 px-4 transition duration-300 ${
+        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
+      {/* Title and Search Bar */}
+      <div className="flex flex-col sm:flex-row items-center justify-between mb-6 space-y-4 sm:space-y-0">
+        <h2 className="text-2xl font-bold">My Applied Visa Details</h2>
+        <div className="flex items-center space-x-2">
+          <input
+            type="text"
+            placeholder="Search by country"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={`rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 border transition duration-200 ${
+              theme === "dark"
+                ? "bg-gray-800 border-gray-700 text-white placeholder-gray-400"
+                : "bg-white border-gray-300 text-black placeholder-gray-600"
+            }`}
+          />
+          <button
+            onClick={handleSearch}
+            className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700"
+          >
+            Search
+          </button>
         </div>
-      ))
-    )}
-  </div>
-</div>
+      </div>
 
+      {/* Visa Applications */}
+      <div className="grid gap-6">
+        {filteredApplications.length === 0 ? (
+          <p className="text-2xl text-center text-red-500">
+            No visa applications found.
+          </p>
+        ) : (
+          filteredApplications.map((application) => (
+            <div
+              key={application?._id}
+              className={`animate__animated animate__fadeInUp rounded-xl shadow-md overflow-hidden md:flex border transition duration-300 ${
+                theme === "dark"
+                  ? "bg-gray-800 border-gray-700"
+                  : "bg-white border-gray-200"
+              }`}
+            >
+              {/* Country Image */}
+              <div className="md:w-1/3">
+                <img
+                  src={application?.visaDetails?.countryImage}
+                  alt={application?.visaDetails?.countryName}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
+              {/* Visa Info */}
+              <div className="md:w-2/3 p-6 space-y-4">
+                {/* Header */}
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3
+                      className={`text-xl font-bold ${
+                        theme === "dark" ? "text-white" : "text-gray-900"
+                      }`}
+                    >
+                      {application?.visaDetails?.countryName}
+                    </h3>
+                    <p
+                      className={`text-sm ${
+                        theme === "dark" ? "text-gray-400" : "text-gray-500"
+                      }`}
+                    >
+                      {application?.visaDetails?.visaType}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleDelete(application?._id)}
+                    className="flex items-center gap-2 text-red-600 hover:text-red-800 text-sm font-medium"
+                  >
+                    <RiDeleteBin2Fill className="text-lg" />
+                    Cancel
+                  </button>
+                </div>
+
+                {/* Visa Details */}
+                <div
+                  className={`grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm ${
+                    theme === "dark" ? "text-gray-200" : "text-gray-700"
+                  }`}
+                >
+                  <p>
+                    <span className="font-semibold">Processing Time:</span>{" "}
+                    {application?.visaDetails?.processingTime} days
+                  </p>
+                  <p>
+                    <span className="font-semibold">Fee:</span> $
+                    {application?.fee}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Validity:</span>{" "}
+                    {application?.visaDetails?.validity} months
+                  </p>
+                  <p>
+                    <span className="font-semibold">Application Method:</span>{" "}
+                    {application?.visaDetails?.applicationMethod}
+                  </p>
+                </div>
+
+                {/* Applicant Info */}
+                <div
+                  className={`text-xs pt-2 border-t ${
+                    theme === "dark"
+                      ? "text-gray-400 border-gray-600"
+                      : "text-gray-500 border-gray-300"
+                  }`}
+                >
+                  <p className="pt-2">
+                    <strong>Applicant:</strong> {application?.firstName}{" "}
+                    {application?.lastName}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {application?.email}
+                  </p>
+                  <p>
+                    <strong>Applied On:</strong> {application?.applyDate}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
   );
 };
 
