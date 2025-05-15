@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const userPhoto =
     user?.photoURL ||
-    "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png";
+    "https://i.pinimg.com/736x/21/cb/d6/21cbd6c7efa053011d8d03b67dbea45d.jpg";
   const userName =
     user?.displayName ||
     (user?.email ? user.email.split("@")[0] : "Unknown User");
@@ -40,7 +40,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.desktop.map((link) => (
               <NavLink
-                key={link.id}
+                key={`desktop-${link.id}`}
                 to={link.to}
                 className={({ isActive }) =>
                   `px-3 py-2 rounded-md text-sm font-medium ${
@@ -72,14 +72,12 @@ const Navbar = () => {
                   <p className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200">
                     {userName}
                   </p>
-
                   <NavLink
                     to="/dashboard"
                     className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"
                   >
                     Dashboard
                   </NavLink>
-
                   <button
                     onClick={logOut}
                     className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-600"
@@ -125,7 +123,7 @@ const Navbar = () => {
           {/* Navigation Links */}
           {navLinks.mobile.map((link) => (
             <NavLink
-              key={link.id}
+              key={`mobile-${link.id}`}
               to={link.to}
               onClick={toggleMenu}
               className={({ isActive }) =>
@@ -145,7 +143,6 @@ const Navbar = () => {
           {/* Authenticated User Section */}
           {user ? (
             <>
-              {/* User Info */}
               <div className="flex items-center px-4 py-2 border-t border-gray-200 dark:border-gray-700">
                 <img
                   src={userPhoto}
@@ -157,7 +154,6 @@ const Navbar = () => {
                 </span>
               </div>
 
-              {/* Dashboard Button */}
               <NavLink
                 to="/dashboard"
                 onClick={toggleMenu}
@@ -166,7 +162,6 @@ const Navbar = () => {
                 Dashboard
               </NavLink>
 
-              {/* Logout Button */}
               <button
                 onClick={() => {
                   logOut();
@@ -178,7 +173,6 @@ const Navbar = () => {
               </button>
             </>
           ) : (
-            // Unauthenticated: Login/Register
             <div className="flex flex-col gap-2 border-t border-gray-200 dark:border-gray-700 pt-3">
               <button
                 onClick={() => {

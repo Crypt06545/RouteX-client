@@ -15,6 +15,7 @@ import VisaDetails from "../pages/VisaDetails";
 import Dashboard from "../pages/Dashboard";
 import Contact from "../pages/Contact";
 import Team from "../pages/Team";
+import AboutMe from "../pages/AboutMe";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
       { path: "add-visa", element: <AddVisa /> },
       { path: "my-added-visas", element: <MyAddedVisa /> },
       { path: "my-visa-applications", element: <VisaApplication /> },
+      { path: "about-me", element: <AboutMe /> },
     ],
   },
 ]);

@@ -19,7 +19,6 @@ const Home = () => {
       <FAQ/>
       <VisaTypes/>
       <Success/>
-      <Team/>
     </div>
   );
 };

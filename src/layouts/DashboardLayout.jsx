@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Outlet, useNavigate, NavLink } from "react-router-dom";
 import { ThemeContext } from "../provider/ThemeProvider";
 import { RiDashboardLine } from 'react-icons/ri';
-import { HiOutlineDocumentAdd, HiOutlineDocumentText, HiOutlineClipboardList } from 'react-icons/hi';
+import { HiOutlineDocumentAdd, HiOutlineDocumentText, HiOutlineClipboardList,HiOutlineUserCircle } from 'react-icons/hi';
 import { FiLogOut, FiSun, FiMoon } from 'react-icons/fi';
 import { AuthContext } from "../provider/AuthProvider";
 
@@ -23,6 +23,8 @@ const DashboardLayout = () => {
     { name: "Add Visa", path: "/dashboard/add-visa", icon: <HiOutlineDocumentAdd className="w-6 h-6" /> },
     { name: "My Added Visas", path: "/dashboard/my-added-visas", icon: <HiOutlineDocumentText className="w-6 h-6" /> },
     { name: "My Applications", path: "/dashboard/my-visa-applications", icon: <HiOutlineClipboardList className="w-6 h-6" /> },
+    { name: "About Me", path: "/dashboard/about-me", icon: <HiOutlineUserCircle className="w-6 h-6" />
+}
   ];
 
   return (

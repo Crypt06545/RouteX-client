@@ -5,10 +5,12 @@ import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../provider/AuthProvider";
 import { ThemeContext } from "../provider/ThemeProvider";
 import { toast } from "react-toastify";
+import Lottie from "lottie-react";
+import animationData from "../assets/animation.json";
 
 const Login = () => {
   const { logIn, googleSignIn, setUser } = useContext(AuthContext);
-  const { theme } = useContext(ThemeContext); // Access the theme from ThemeContext
+  const { theme } = useContext(ThemeContext);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,11 +19,8 @@ const Login = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "email") {
-      setEmail(value);
-    } else if (name === "password") {
-      setPassword(value);
-    }
+    if (name === "email") setEmail(value);
+    else if (name === "password") setPassword(value);
   };
 
   const handleSubmit = (e) => {
@@ -62,13 +61,14 @@ const Login = () => {
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center ${
+      className={`min-h-screen flex flex-col md:flex-row items-center justify-center ${
         isDarkTheme ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
       }`}
     >
+      {/* Left side: Form */}
       <form
         onSubmit={handleSubmit}
-        className={`w-full max-w-md p-8 rounded-lg shadow-md ${
+        className={`w-full max-w-md p-8 rounded-lg shadow-md mx-4 my-8 md:my-0 ${
           isDarkTheme ? "bg-gray-800" : "bg-white"
         }`}
       >
@@ -153,6 +153,17 @@ const Login = () => {
           </button>
         </div>
       </form>
+
+      {/* Right side: Lottie Animation */}
+     <div className="w-full max-w-xs mx-4 my-8 md:my-0">
+  <Lottie
+    animationData={animationData}
+    loop={true}
+    autoplay={true}
+    style={{ width: "100%", height: "auto", maxHeight: "280px" }}
+  />
+</div>
+
     </div>
   );
 };

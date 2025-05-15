@@ -18,11 +18,11 @@ const Contact = () => {
     e.preventDefault();
   };
   return (
-    <div className={`py-20 ${isDark ? "bg-gray-800" : "bg-white"}`}>
-      <div className=" w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className={`py-20 ${isDark ? "bg-gray-800" : "bg-white overflow-x-hidden"}`}>
+      <div className="overflow-x-hidden w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Contact Form Section */}
         <div
-          className={`animate__animated animate__backInLeft p-6 rounded-lg shadow-lg ${
+          className={`overflow-x-hidden animate__animated animate__backInLeft p-6 rounded-lg shadow-lg ${
             isDark ? "bg-gray-900 text-white" : "bg-white text-gray-800"
           }`}
         >

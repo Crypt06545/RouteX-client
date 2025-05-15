@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import { ThemeContext } from "../provider/ThemeProvider";
 import ApplyModal from "../components/ApplyModal";
@@ -10,6 +10,7 @@ const VisaDetails = () => {
   const { theme } = useContext(ThemeContext);
   const [visaDetails, setVisaDetails] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_BASE_URL}/visadetails/${id}`)
@@ -37,6 +38,10 @@ const VisaDetails = () => {
   // Text colors for better dark mode visibility
   const textSecondary = theme === "dark" ? "text-gray-300" : "text-gray-500";
   const textTertiary = theme === "dark" ? "text-gray-400" : "text-gray-600";
+  const handleClick =()=>{
+    navigate('/contact')
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   if (loading) return <Loader />;
 
@@ -163,7 +168,7 @@ const VisaDetails = () => {
                 <p className={`text-sm ${textSecondary} mb-3`}>
                   Our visa experts are available to assist you with any questions.
                 </p>
-                <button className={`w-full border ${theme === 'dark' ? 'border-emerald-400 text-emerald-300 hover:bg-emerald-900/30' : 'border-emerald-500 text-emerald-600 hover:bg-emerald-50'} font-medium py-2 px-4 rounded-lg transition duration-200`}>
+                <button onClick={handleClick} className={`w-full border ${theme === 'dark' ? 'border-emerald-400 text-emerald-300 hover:bg-emerald-900/30' : 'border-emerald-500 text-emerald-600 hover:bg-emerald-50'} font-medium py-2 px-4 rounded-lg transition duration-200`}>
                   Contact Support
                 </button>
               </div>
