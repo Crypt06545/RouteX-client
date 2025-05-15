@@ -16,6 +16,7 @@ import Dashboard from "../pages/Dashboard";
 import Contact from "../pages/Contact";
 import Team from "../pages/Team";
 import AboutMe from "../pages/AboutMe";
+import About from "../pages/About";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/all-visas", element: <AllVisa /> },
       { path: "/contact", element: <Contact /> },
+      { path: "/about", element: <About /> },
       { path: "/visa-details/:id", element: <VisaDetails /> },
       { path: "/team", element: <Team /> },
       { path: "/login", element: <Login /> },
