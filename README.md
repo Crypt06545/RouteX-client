@@ -89,8 +89,11 @@ npm run dev
 #### 🔑 Environment Variables
 
 ```
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-FIREBASE_API_KEY=your_firebase_api_key
-FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+VITE_API_KEY=
+VITE_AUTH_DOMAIN=
+VITE_PROJECT_ID=
+VITE_STORAGE_BUCKET=
+VITE_MESSAGING_SENDER_ID=
+VITE_APP_ID=
+VITE_API_BASE_URL=
 ```
