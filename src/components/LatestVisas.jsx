@@ -15,6 +15,8 @@ const LatestVisas = () => {
     fetch(`${import.meta.env.VITE_API_BASE_URL}/latestvisas`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
+        
         setVisas(data);
         setIsLoading(false);
       })
