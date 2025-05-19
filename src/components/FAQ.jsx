@@ -6,7 +6,7 @@ const FAQ = () => {
 
   const bg = theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-800";
   const border = theme === "dark" ? "border-gray-700" : "border-gray-300";
-  const textColor = theme === "dark" ? "text-gray-400" : "text-gray-600";
+  const textColor = theme === "dark" ? "text-gray-300" : "text-gr";
 
   const faqs = [
     { q: "How long does visa approval take?", a: "Typically between 5–15 working days depending on the country." },

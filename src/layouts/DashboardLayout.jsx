@@ -9,6 +9,8 @@ import { AuthContext } from "../provider/AuthProvider";
 const DashboardLayout = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { user, logOut } = useContext(AuthContext);
+  console.log(user);
+  
   const navigate = useNavigate();
 
   const containerClass = theme === "dark"

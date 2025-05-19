@@ -9,7 +9,7 @@ const Team = () => {
   const card = theme === "dark"
     ? "bg-gray-800 hover:bg-gray-700"
     : "bg-white hover:bg-gray-100";
-  const textMuted = "text-gray-400";
+  const textMuted = "text-green-500";
 
   const teamMembers = [
     {

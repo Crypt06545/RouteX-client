@@ -25,7 +25,7 @@ const Success = () => {
           <FaUserAlt className={`text-8xl mr-6 ${isDark ? 'text-[#83CD20]' : 'text-[#83CD20]'}`} />
           <div>
             <h3 className="font-semibold text-2xl">200+ Team Members</h3>
-            <p className="text-sm text-gray-500 mt-2">Our talented and diverse team is the driving force behind every success, working together to achieve excellence across all projects.</p>
+            <p className="text-sm text-green-500 mt-2">Our talented and diverse team is the driving force behind every success, working together to achieve excellence across all projects.</p>
           </div>
         </div>
 
@@ -34,7 +34,7 @@ const Success = () => {
           <FaThumbsUp className={`text-8xl mr-6 ${isDark ? 'text-[#83CD20]' : 'text-[#83CD20]'}`} />
           <div>
             <h3 className="font-semibold text-2xl">Client Satisfaction</h3>
-            <p className="text-sm text-gray-500 mt-2">Our clients consistently express their satisfaction with our services, thanks to our unwavering commitment to quality and innovation.</p>
+            <p className="text-sm text-green-500 mt-2">Our clients consistently express their satisfaction with our services, thanks to our unwavering commitment to quality and innovation.</p>
           </div>
         </div>
 
@@ -43,7 +43,7 @@ const Success = () => {
           <FaFlag className={`text-8xl mr-6 ${isDark ? 'text-[#83CD20]' : 'text-[#83CD20]'}`} />
           <div>
             <h3 className="font-semibold text-2xl">Global Reach</h3>
-            <p className="text-sm text-gray-500 mt-2">Our services extend across continents, empowering individuals and organizations to achieve their goals, no matter where they are located.</p>
+            <p className="text-sm text-green-500 mt-2">Our services extend across continents, empowering individuals and organizations to achieve their goals, no matter where they are located.</p>
           </div>
         </div>
 
@@ -52,7 +52,7 @@ const Success = () => {
           <FaTrophy className={`text-8xl mr-6 ${isDark ? 'text-[#83CD20]' : 'text-[#83CD20]'}`} />
           <div>
             <h3 className="font-semibold text-2xl">Award-Winning Services</h3>
-            <p className="text-sm text-gray-500 mt-2">We have received numerous accolades for our outstanding contributions to the industry, demonstrating our commitment to excellence and innovation.</p>
+            <p className="text-sm text-green-500 mt-2">We have received numerous accolades for our outstanding contributions to the industry, demonstrating our commitment to excellence and innovation.</p>
           </div>
         </div>
       </div>

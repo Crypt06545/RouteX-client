@@ -40,7 +40,7 @@ const Testimonials = () => {
   const bg = theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-800";
   const card = theme === "dark" ? "bg-gray-800" : "bg-white";
   const iconColor = theme === "dark" ? "text-emerald-400" : "text-emerald-600";
-  const textColor = theme === "dark" ? "text-gray-300" : "text-gray-600";
+  const textColor = theme === "dark" ? "text-gray-200" : "text-green-500";
 
   return (
     <section className={`py-16 px-4 md:px-12 ${bg}`}>
@@ -68,7 +68,7 @@ const Testimonials = () => {
                   />
                   <div className="text-left">
                     <h4 className="font-semibold">{r.name}</h4>
-                    <p className="text-xs text-gray-400">{r.country}</p>
+                    <p className="text-xs text-green-500">{r.country}</p>
                   </div>
                 </div>
                 <FaQuoteLeft className={`text-xl mb-2 ${iconColor}`} />

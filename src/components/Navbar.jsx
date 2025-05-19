@@ -68,19 +68,31 @@ const Navbar = () => {
                   alt="User Avatar"
                   className="w-8 h-8 rounded-full cursor-pointer border-2 border-[#83CD20]"
                 />
-                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-700 rounded-md shadow-lg py-1 z-50 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <p className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200">
+                <div
+                  className={`absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 z-50 opacity-0 group-hover:opacity-100 transition-opacity duration-200
+    ${theme === "dark" ? "bg-gray-800 text-gray-200" : "bg-white text-gray-800"}
+  `}
+                >
+                  <p className="block px-4 py-2 text-sm font-semibold">
                     {userName}
                   </p>
                   <NavLink
                     to="/dashboard"
-                    className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"
+                    className={`block w-full text-left px-4 py-2 text-sm transition ${
+                      theme === "dark"
+                        ? "hover:bg-gray-600 text-gray-200"
+                        : "hover:bg-gray-100 text-gray-700"
+                    }`}
                   >
                     Dashboard
                   </NavLink>
                   <button
                     onClick={logOut}
-                    className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-600"
+                    className={`block w-full text-left px-4 py-2 text-sm transition ${
+                      theme === "dark"
+                        ? "text-red-400 hover:bg-gray-600"
+                        : "text-red-500 hover:bg-gray-100"
+                    }`}
                   >
                     Logout
                   </button>
@@ -117,7 +129,11 @@ const Navbar = () => {
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } md:hidden absolute top-16 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg z-40`}
+        } md:hidden absolute top-16 left-0 right-0 shadow-lg z-40 ${
+          theme === "dark"
+            ? "bg-gray-800 text-gray-200"
+            : "bg-white text-gray-800"
+        }`}
       >
         <div className="px-4 pt-4 pb-4 space-y-2">
           {/* Navigation Links */}
@@ -143,21 +159,29 @@ const Navbar = () => {
           {/* Authenticated User Section */}
           {user ? (
             <>
-              <div className="flex items-center px-4 py-2 border-t border-gray-200 dark:border-gray-700">
+              <div
+                className={`flex items-center px-4 py-2 border-t text-sm font-medium ${
+                  theme === "dark"
+                    ? "border-gray-700 text-gray-200"
+                    : "border-gray-200 text-gray-800"
+                }`}
+              >
                 <img
                   src={userPhoto}
                   alt="User"
                   className="w-8 h-8 rounded-full mr-2"
                 />
-                <span className="text-gray-700 dark:text-gray-200 text-sm font-medium">
-                  {userName}
-                </span>
+                <span>{userName}</span>
               </div>
 
               <NavLink
                 to="/dashboard"
                 onClick={toggleMenu}
-                className="block px-4 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                className={`block px-4 py-2 rounded-md text-base font-medium transition ${
+                  theme === "dark"
+                    ? "text-gray-200 hover:bg-gray-600"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
               >
                 Dashboard
               </NavLink>
@@ -167,13 +191,21 @@ const Navbar = () => {
                   logOut();
                   toggleMenu();
                 }}
-                className="block w-full text-left px-4 py-2 rounded-md text-base font-medium text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                className={`block w-full text-left px-4 py-2 rounded-md text-base font-medium transition ${
+                  theme === "dark"
+                    ? "text-red-400 hover:bg-gray-600"
+                    : "text-red-500 hover:bg-gray-100"
+                }`}
               >
                 Logout
               </button>
             </>
           ) : (
-            <div className="flex flex-col gap-2 border-t border-gray-200 dark:border-gray-700 pt-3">
+            <div
+              className={`flex flex-col gap-2 border-t pt-3 ${
+                theme === "dark" ? "border-gray-700" : "border-gray-200"
+              }`}
+            >
               <button
                 onClick={() => {
                   navigate("/login");

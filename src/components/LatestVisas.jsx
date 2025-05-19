@@ -87,17 +87,18 @@ const LatestVisas = () => {
                   <div className="p-6">
                     <div className="flex justify-between mb-3">
                       <div>
-                        <p className="text-sm text-gray-500">Processing Time</p>
+                        <p className={`text-sm ${theme === 'dark' ? 'text-gray-200' : 'text-green-600'}`}>Processing Time</p>
+
                         <p className="font-medium">
                           {visa?.processingTime} days
                         </p>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Fee</p>
-                        <p className="font-medium">${visa?.fee}</p>
+                        <p className={`text-sm ${theme === 'dark' ? 'text-gray-200' : 'text-green-600'}`}>Fee</p>
+                        <p className="font-medium ">${visa?.fee}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Validity</p>
+                        <p className={`text-sm ${theme === 'dark' ? 'text-gray-200' : 'text-green-600'}`}>Validity</p>
                         <p className="font-medium">{visa?.validity} months</p>
                       </div>
                     </div>

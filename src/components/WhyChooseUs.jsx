@@ -49,7 +49,7 @@ const WhyChooseUs = () => {
         <h2 className="text-4xl font-bold mb-4 animate__animated animate__fadeInDown">
           Why Choose Us
         </h2>
-        <p className="text-lg mb-12 animate__animated animate__fadeInUp text-gray-400 max-w-2xl mx-auto">
+        <p className="text-lg mb-12 animate__animated animate__fadeInUp text-green-500 max-w-2xl mx-auto">
           Discover what makes us the preferred choice for visa services around the globe.
         </p>
 
@@ -63,7 +63,7 @@ const WhyChooseUs = () => {
                 {item.icon}
               </div>
               <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-              <p className="text-sm text-gray-400">{item.description}</p>
+              <p className="text-sm text-green-400">{item.description}</p>
             </div>
           ))}
         </div>

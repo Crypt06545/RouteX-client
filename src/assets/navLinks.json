@@ -10,7 +10,7 @@
     { "id": 1, "label": "Home", "to": "/" },
     { "id": 2, "label": "All Visas", "to": "/all-visas" },
     { "id": 3, "label": "Contact", "to": "/contact" },
-    { "id": 4, "label": "Contact", "to": "/contact" },
+    { "id": 4, "label": "Team", "to": "/team" },
     { "id": 5, "label": "About", "to": "/about" }
   ]
 }
